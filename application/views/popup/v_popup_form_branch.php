@@ -2,6 +2,8 @@
 		  <!-- general form elements -->
 		  <input type="hidden" id="braId" name="braId" value="<?php if(isset($_GET["id"])){ echo $_GET["id"]; }?>"/>
 		  <input type="hidden" id="frmAct" name="frmAct" value="<?php if(isset($_GET["action"])){ echo $_GET["action"]; }?>"/>
+		  <input type="hidden" id="parentId" name="parentId" value="<?php if(isset($_GET["parentId"])){ echo $_GET["parentId"]; }?>"/>
+		 
 		  <!-- form start -->
           <form role="form" class="form-horizontal" id="frmBranch" action="" style="display: none">
           <div class="modal-header">

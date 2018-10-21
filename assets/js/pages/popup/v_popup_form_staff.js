@@ -1,57 +1,72 @@
 var _btnId;
+var _this;
 $(document).ready(function() {
-	/*
-	 * 
-	 */
-	
-	parent.$("#loading").hide();
-	getBrnachType();
-	clearForm();
-	if($("#frmAct").val() == "U"){
-	    getDataEdit($("#braId").val());
-	    $("#popupTitle").html("<i class='fa fa-home'></i> "+$.i18n.prop("btn_edit")+" "+ $.i18n.prop("lb_branch"));
-	}else{
-	    $("#btnSaveNew").show();
-	    $("#popupTitle").html("<i class='fa fa-home'></i> "+$.i18n.prop("btn_add_new")+" "+ $.i18n.prop("lb_branch"));
-	}
-	$("#frmBranch").show();
-	$("#braNm").focus();
-	/**
-	 * 
-	 */
-	$("#btnClose,#btnExit").click(function(e){
-		//parent.$("#modalMd").modal('hide');
-		var parentFrame="";
-		var callbackFunction=null;
-		if($("#parentId").val() !="" && $("#parentId").val() !=null){
-			parentFrame= $("#parentId").val();
-			callbackFunction=parent.$("#"+parentFrame)[0].contentWindow.popupBranchCallback
-		}else{
-			callbackFunction=parent.popupBranchCallback;
-		}
-		
-		parent.stock.comm.closePopUpForm("PopupFormBranch",callbackFunction);
-	});
-	$("#frmBranch").submit(function(e){
-		e.preventDefault();
-		if(_btnId == "btnSave"){
-	    	saveData();
-		}else{
-	    	saveData("new");
-		}
-	
-	});
-	
-	$("#btnSave").click(function(e){
-		_btnId= $(this).attr("id");
-		
-	});
-	
-	$("#btnSaveNew").click(function(e){
-		_btnId= $(this).attr("id");
-		
-	});
+	_thisPage.init();
 });
+
+var _thisPage = {
+		init : function(){
+			_this = this;
+			
+			_this.onload();
+			_this.event();
+		},
+		onload : function(){
+			parent.$("#loading").hide();
+			getBrnachType();
+			clearForm();
+			if($("#frmAct").val() == "U"){
+			    getDataEdit($("#braId").val());
+			    $("#popupTitle").html("<i class='fa fa-home'></i> "+$.i18n.prop("btn_edit")+" "+ $.i18n.prop("lb_branch"));
+			}else{
+			    $("#btnSaveNew").show();
+			    $("#popupTitle").html("<i class='fa fa-home'></i> "+$.i18n.prop("btn_add_new")+" "+ $.i18n.prop("lb_branch"));
+			}
+			$("#frmBranch").show();
+			$("#braNm").focus();
+		},
+		event : function(){
+			//
+			$("#btnClose,#btnExit").click(function(e){
+				//parent.$("#modalMd").modal('hide');
+				parent.stock.comm.closePopUpForm("PopupFormStaff",parent.popupStaffCallback);
+			});
+			//
+			$("#frmBranch").submit(function(e){
+				e.preventDefault();
+				if(_btnId == "btnSave"){
+			    	saveData();
+				}else{
+			    	saveData("new");
+				}
+			
+			});
+			//
+			$("#btnSave").click(function(e){
+				_btnId= $(this).attr("id");
+				
+			});
+			//
+			$("#btnSaveNew").click(function(e){
+				_btnId= $(this).attr("id");
+				
+			});
+			//
+			$("#btnSelectPhoto").click(function(e){
+				$("#userfile").trigger( "click" );
+				
+			});
+			
+			//
+			$("#btnPopupBranch").click(function(e){
+				var data=null;
+				var controllerNm = "PopupSelectBranch";
+				var option={};
+				option["height"] = "450px";
+			    stock.comm.openPopUpSelect(controllerNm,option, data,"modal-md");
+			});
+		}
+};
 
 
 function getBrnachType(){
@@ -95,16 +110,7 @@ function saveData(str){
 				    clearForm();
 				}else{
 				    //close popup
-					var parentFrame="";
-					var callbackFunction=null;
-					if($("#parentId").val() !="" && $("#parentId").val() !=null){
-						parentFrame= $("#parentId").val();
-						callbackFunction=parent.$("#"+parentFrame)[0].contentWindow.popupBranchCallback
-					}else{
-						callbackFunction=parent.popupBranchCallback;
-					}
-					
-					parent.stock.comm.closePopUpForm("PopupFormBranch",callbackFunction);
+				    parent.stock.comm.closePopUpForm("PopupFormStaff",parent.popupStaffCallback);
 				}
 			}
 		},

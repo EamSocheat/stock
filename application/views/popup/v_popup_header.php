@@ -58,6 +58,18 @@
     .input-sm{
         border-radius: 3px;
     }
+    
+    .fix-header-tbl{
+        overflow-y:scroll;overflow-x:none;
+        border: none
+    }
+    
+    .fix-header-tbl table th{
+        position: sticky;
+        top: -10px;
+        background: #f4f4f4;
+    }
+   
   </style>
 </head>
 <body>

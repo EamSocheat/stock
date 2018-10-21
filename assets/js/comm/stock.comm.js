@@ -298,27 +298,49 @@ if(!stock.comm) {stock.comm={};}
 	/**
 	 * 
 	 */
-	stock.comm.openPopUpForm = function(controller_nm, option, data){
+	stock.comm.openPopUpForm = function(controller_nm, option, data, modal_size, id_popup, id_popup_content, id_iframe){
+		var modalId= "";
+		var popupContentId = "";
+		var iframeId = "";
+		if(id_popup != undefined && id_popup !="" && id_popup != null){
+			modalId= id_popup;
+			popupContentId = id_popup_content;
+			iframeId = $("#"+id_iframe);
+		}else{
+			modalId = "modalMd";
+			popupContentId = "modalMdContent";
+			iframeId = parent.$("#ifameStockForm");
+		}
+		//
+		if(modal_size !="" && modal_size !=null && modal_size != undefined){
+			if(modal_size == "modal-sm" || modal_size == "modal-md" || modal_size == "modal-lg" ){
+				parent.$("#"+modalId+" .modal-dialog").removeClass("modal-sm");
+				parent.$("#"+modalId+" .modal-dialog").removeClass("modal-md");
+				parent.$("#"+modalId+" .modal-dialog").removeClass("modal-lg");
+				//
+				parent.$("#"+modalId+" .modal-dialog").addClass(modal_size);
+			}
+		}
 	    $("#loading").show();
 		var dataUrl="";
 		if(data !=null && data !="" && data != undefined){
 			dataUrl="?"+data;
 		}
 		
-		var iframe = $("#ifameStockForm");
+		var iframe = iframeId;
 	    iframe.attr("src", $("#base_url").val()+controller_nm+dataUrl); 
 	    iframe.show();
-	    $("#modalMd").modal({backdrop: "static"});
+	    parent.$("#"+modalId).modal({backdrop: "static"});
 	    
-	    $("#modalMd").removeClass();
-	    $("#modalMd").addClass(controller_nm);
-	    $("#modalMd").addClass("modal");
-	    $("#modalMd").addClass("fade");
+	    parent.$("#"+modalId).removeClass();
+	    parent.$("#"+modalId).addClass(controller_nm);
+	    parent.$("#"+modalId).addClass("modal");
+	    parent.$("#"+modalId).addClass("fade");
 	    
-	    $("#modalMdContent").css("height",option["height"]);
-	    $("#modalMdContent").css("border-radius","5px");
+	    parent.$("#"+popupContentId).css("height",option["height"]);
+	    parent.$("#"+popupContentId).css("border-radius","5px");
 	    iframe.css("border-radius","5px");
-	    $("#modalMdContent").html(iframe);
+	    parent.$("#"+popupContentId).html(iframe);
 	    
 	};
 	/**
@@ -326,11 +348,59 @@ if(!stock.comm) {stock.comm={};}
 	 */ 
 	stock.comm.closePopUpForm = function(class_name,callback){
 	    $("."+class_name).modal("hide");
-	    if (typeof callback === "function") {
-	    		callback();
+    	if (typeof callback === "function") {
+    		callback();
     	}
 	};
 	
+	/**
+	 * 
+	 */
+	stock.comm.openPopUpSelect = function(controller_nm, option, data, modal_size, id_popup, id_popup_content, id_iframe){
+		var modalId= "";
+		var popupContentId = "";
+		var iframeId;
+		if(id_popup != undefined && id_popup !="" && id_popup != null){
+			modalId= id_popup;
+			popupContentId = id_popup_content;
+			iframeId = parent.$("#"+id_iframe);
+		}else{
+			modalId = "modalMdSelect";
+			popupContentId = "modalMdContentSelect";
+			iframeId = parent.$("#ifameStockSelect");
+		}
+		
+		if(modal_size !="" && modal_size !=null && modal_size != undefined){
+			if(modal_size == "modal-sm" || modal_size == "modal-md" || modal_size == "modal-lg" ){
+				parent.$("#"+modalId+" .modal-dialog").removeClass("modal-sm");
+				parent.$("#"+modalId+" .modal-dialog").removeClass("modal-md");
+				parent.$("#"+modalId+" .modal-dialog").removeClass("modal-lg");
+				//
+				parent.$("#"+modalId+" .modal-dialog").addClass(modal_size);
+			}
+		}
+	    $("#loading").show();
+		var dataUrl="";
+		if(data !=null && data !="" && data != undefined){
+			dataUrl="?"+data;
+		}
+		
+		var iframe = iframeId;
+	    iframe.attr("src", $("#base_url").val()+controller_nm+dataUrl); 
+	    iframe.show();
+	    parent.$("#"+modalId+"").modal({backdrop: "static"});
+	    
+	    parent.$("#"+modalId+"").removeClass();
+	    parent.$("#"+modalId+"").addClass(controller_nm);
+	    parent.$("#"+modalId+"").addClass("modal");
+	    parent.$("#"+modalId+"").addClass("fade");
+	    
+	    parent.$("#"+popupContentId+"").css("height",option["height"]);
+	    parent.$("#"+popupContentId+"").css("border-radius","5px");
+	    iframe.css("border-radius","5px");
+	    parent.$("#"+popupContentId+"").html(iframe);
+	    
+	};
 	
     stock.comm.renderPaging = function(target_id, per_page, total_rec, page_no){
         $("#chkAllBranch").prop( "checked", false );
