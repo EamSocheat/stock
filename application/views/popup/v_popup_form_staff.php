@@ -18,7 +18,7 @@
             		
             			<div class="col-xs-4 padding-forms-left">
                 			<div class="image" style="text-align: center">
-                            	<img src="http://localhost/git/stock-project/assets/dist/img/user2-160x160.jpg" class="img-circle" style="width: 150px;" alt="User Image">
+                            	<img src="<?php echo base_url('assets/image/default-staff-photo.png') ?>" class="img-circle" style="width: 150px;" alt="User Image">
                             </div>
                             <div style="text-align: center;margin-top: 5px;">
                             	<button  type="button" class="btn btn-info btn-xs" id="btnSelectPhoto"><i class="fa fa-image" aria-hidden="true"></i> <span data-i18ncd="lb_select_img">Select Image</span></button>
@@ -29,23 +29,24 @@
                 			<div class="form-group">
                 				<label for="braNm2" data-i18ncd="lb_branch">Branch Name</label>
                 				<div class="input-group">
-                                	<input type="text" class="form-control input-sm" disabled="disabled">
+                                	<input type="text" class="form-control input-sm" disabled="disabled" id="txtBraNm" name="txtBraNm">
                                     <span id="btnPopupBranch" class="input-group-addon label-warning" style="cursor: pointer;border-color: #f39c12 !important;"><i class="fa fa-search-plus"></i></span>
                                 </div>
+                                <input type="hidden" class="form-control input-sm" disabled="disabled" id="txtBraId" name="txtBraId">
                 			</div>
                 			<!--  -->
                 			<div class="form-group">
                               <label for="braNm" data-i18ncd="lb_name">Name</label>
-                              <input type="text" class="form-control" id="braNm" name="braNm" required="required">
+                              <input type="text" class="form-control" id="txtStaffNm" name="txtStaffNm" required="required">
                             </div>
                 		</div>
                 		
                 		<div class="col-xs-4 padding-forms-right">
                 			<div class="form-group">
-                				<label for="braNm2" data-i18ncd="lb_position">Position</label>
+                				<label for="txtPosNm" data-i18ncd="lb_position">Position</label>
                 				<div class="input-group">
-                                	<input type="text" class="form-control input-sm" disabled="disabled">
-                                    <span class="input-group-addon label-warning" style="cursor: pointer;border-color: #f39c12 !important;"><i class="fa fa-search-plus"></i></span>
+                                	<input type="text" class="form-control input-sm" disabled="disabled" id="txtPosNm" name="txtPosNm">
+                                    <span id="btnPopupPosition" class="input-group-addon label-warning" style="cursor: pointer;border-color: #f39c12 !important;"><i class="fa fa-search-plus"></i></span>
                                 </div>
                 			</div>
                 			<!--  -->

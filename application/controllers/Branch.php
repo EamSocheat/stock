@@ -76,9 +76,10 @@ class Branch extends CI_Controller {
             'offset' 		=> $this->input->post('offset'),
             'bra_id' 		=> $this->input->post('bra_id'),
             'bra_nm' 		=> $this->input->post('braNm'),
-            'bra_nm_kh' 		=> $this->input->post('braNmKh'),
+            'bra_nm_kh' 	=> $this->input->post('braNmKh'),
             'bra_phone1' 	=> $this->input->post('braPhone'),
-            'bra_type_id' 		=> $this->input->post('braType'),
+            'bra_type_id' 	=> $this->input->post('braType'),
+            'srch_all' 		=> $this->input->post('srchAll')
         );
 	    $data["OUT_REC"] = $this->M_branch->selectBrand($dataSrch);
 	    $data["OUT_REC_CNT"] = $this->M_branch->countBrand($dataSrch);

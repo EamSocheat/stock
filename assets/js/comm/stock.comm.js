@@ -346,10 +346,10 @@ if(!stock.comm) {stock.comm={};}
 	/**
 	 * 
 	 */ 
-	stock.comm.closePopUpForm = function(class_name,callback){
+	stock.comm.closePopUpForm = function(class_name,callback,data){
 	    $("."+class_name).modal("hide");
     	if (typeof callback === "function") {
-    		callback();
+    		callback(data);
     	}
 	};
 	
@@ -491,10 +491,10 @@ if(!stock.comm) {stock.comm={};}
     };
     
     stock.comm.checkAllTblChk = function(chk_id, tbl_id, class_tocheck){
-         $("#"+chk_id).prop( "checked", false );
+    	
+        $("#"+chk_id).prop( "checked", false );
         
         $("#"+chk_id).click(function(e){
-            
             if($("#"+chk_id).is(":checked")){
                 $("#"+tbl_id+" tbody ."+class_tocheck+" input[type=checkbox]").prop( "checked", true );
                 $("#"+tbl_id+" tbody tr").css("background-color","#f4f4f4");

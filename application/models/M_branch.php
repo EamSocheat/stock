@@ -41,6 +41,15 @@
         	    $this->db->where('tbl_branch_type.bra_type_id', $dataSrch['bra_type_id']);
         	}
         	
+        	//
+        	if($dataSrch['srch_all'] != null && $dataSrch['srch_all'] != ""){
+        		$this->db->like('tbl_branch.bra_nm', $dataSrch['srch_all']);
+        	    $this->db->or_like('tbl_branch.bra_nm_kh', $dataSrch['srch_all']);
+        	    $this->db->or_like('tbl_branch_type.bra_nm', $dataSrch['srch_all']);
+        	    $this->db->or_like('tbl_branch_type.bra_nm_kh', $dataSrch['srch_all']);
+        	}
+        	
+        	$this->db->order_by("bra_id", "desc");
         	return $this->db->get('tbl_branch',$dataSrch['limit'],$dataSrch['offset'])->result();
 		}
 		
@@ -66,6 +75,7 @@
         	if($dataSrch['bra_type_id'] != null && $dataSrch['bra_type_id'] != ""){
         	    $this->db->where('tbl_branch_type.bra_type_id', $dataSrch['bra_type_id']);
         	}
+        	
         	return $this->db->get()->result();
 		}
 

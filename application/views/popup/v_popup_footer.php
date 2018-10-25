@@ -61,13 +61,144 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
+
+//Date for the calendar events (dummy data)
+var date = new Date()
+var d    = date.getDate(),
+    m    = date.getMonth(),
+    y    = date.getFullYear()
+$('#adminCalendar').fullCalendar({
+  disableDragging: true,
+  eventStartEditable: false,
+  header    : {
+    left  : 'prev,next today',
+    center: 'title',
+    right : ''
+  },
+  buttonText: {
+    today: 'today',
+    month: 'month',
+    week : 'week',
+    day  : 'day'
+  },
+  //Random default events
+  events    : [
+    {
+      title          : 'All Day Event',
+      start          : new Date(y, m, 1),
+      backgroundColor: '#f56954', //red
+      borderColor    : '#f56954' //red
+    },
+    {
+      title          : 'Long Event',
+      start          : new Date(y, m, d - 5),
+      end            : new Date(y, m, d - 2),
+      backgroundColor: '#f39c12', //yellow
+      borderColor    : '#f39c12' //yellow
+    },
+    {
+      title          : 'Meeting',
+      start          : new Date(y, m, d, 10, 30),
+      allDay         : false,
+      backgroundColor: '#0073b7', //Blue
+      borderColor    : '#0073b7' //Blue
+    },
+    {
+      title          : 'Lunch',
+      start          : new Date(y, m, d, 12, 0),
+      end            : new Date(y, m, d, 14, 0),
+      allDay         : false,
+      backgroundColor: '#00c0ef', //Info (aqua)
+      borderColor    : '#00c0ef' //Info (aqua)
+    },
+    {
+      title          : 'Birthday Party',
+      start          : new Date(y, m, d + 1, 19, 0),
+      end            : new Date(y, m, d + 1, 22, 30),
+      allDay         : false,
+      backgroundColor: '#00a65a', //Success (green)
+      borderColor    : '#00a65a' //Success (green)
+    },
+    {
+      title          : 'Click for Google',
+      start          : new Date(y, m, 28),
+      end            : new Date(y, m, 29),
+      url            : 'http://google.com/',
+      backgroundColor: '#3c8dbc', //Primary (light-blue)
+      borderColor    : '#3c8dbc' //Primary (light-blue)
+    }
+  ],
+  editable  : true,
+  droppable : true, // this allows things to be dropped onto the calendar !!!
+  drop      : function (date, allDay) { // this function is called when something is dropped
+
+    // retrieve the dropped element's stored Event Object
+    var originalEventObject = $(this).data('eventObject')
+
+    // we need to copy it, so that multiple events don't have a reference to the same object
+    var copiedEventObject = $.extend({}, originalEventObject)
+
+    // assign it the date that was reported
+    copiedEventObject.start           = date
+    copiedEventObject.allDay          = allDay
+    copiedEventObject.backgroundColor = $(this).css('background-color')
+    copiedEventObject.borderColor     = $(this).css('border-color')
+
+    // render the event on the calendar
+    // the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
+    $('#adminCalendar').fullCalendar('renderEvent', copiedEventObject, true)
+
+  }
+
+
+  	
+
+  
+});
+
 $(document).ready(function() {
-    parent.$("#loading").show();
+
+
 	/* onload */
+	
+	//render menu for user
+	getUserMenu();
+	
 	//
 	checkCookieLang();
 	//
-			
+	
+	/*  */
+	
+	
+	$("#langDropSelect a").click(function(e){
+		$('#loading').show();
+		//$("#langDrop").html($(this).html());
+		var lang="";
+		if($(this).attr("id") =="langKh"){
+			lang="kh";
+		}else{
+			lang="en";
+		}
+		//changeLang(lang);
+		setCookie("lang", lang, 100);
+		window.location.reload();
+	});
+
+	$(".box-search .box-header h3").click(function(e){
+		$(".box-search .box-body").slideToggle(500,function(){
+			$(".form-control").eq(0).focus();
+			if($(".box-search .box-body").css("display") == "block"){
+				$(".box-search .box-header i").removeClass("fa-search-plus");
+				$(".box-search .box-header i").addClass("fa-search");
+			}else{
+				$(".box-search .box-header i").removeClass("fa-search");
+				$(".box-search .box-header i").addClass("fa-search-plus");
+			}
+		});
+		
+	});	
+		
 });
 
 function setCookie(cname,cvalue,exdays) {
@@ -103,14 +234,18 @@ function checkCookieLang(){
     		/* $("body").css("font-family","Source Sans Pro,Helvetica Neue,Helvetica,Arial,sans-serif,Khmer Os Battambang");
     		$("body").css("font-size","14px");
     		*/
-    		$("#langDrop").html('<img style="width: 28px;" alt="" src="'+$("#base_url").val()+'assets/image/khmer.png"/>&nbsp;ភាសាខ្មែរ');
+    		$("#langDrop").html('<img style="width: 28px;" alt="" src="'+$("#base_url").val()+'assets/image/khmer.png"/>');
     		$("#langDrop").attr("data-lng","kh");
+    		$("body").css("font-size","14px");
+	    	$("body .form-control").css("font-size","14px");
+	    	$("body .input-sm").css("font-size","13px");
+	    	$("body .form-control-sm").css("font-size","13px");
 			/* 
     		$("body .form-control").css("font-size","14px");
     		$("body .form-control-sm").css("font-size","13px");
     		 */
         }else{
-        	$("#langDrop").html('<img style="width: 28px;" alt="" src="'+$("#base_url").val()+'assets/image/english.png"/>&nbsp;English');
+        	$("#langDrop").html('<img style="width: 28px;" alt="" src="'+$("#base_url").val()+'assets/image/english.png"/>');
         	$("#langDrop").attr("data-lng","en");
 			/* 
         	$("body").css("font-family","Source Sans Pro,Helvetica Neue,Helvetica,Arial,sans-serif,Khmer Os Battambang");
@@ -123,11 +258,12 @@ function checkCookieLang(){
     	$("body").css("font-family","Source Sans Pro,Helvetica Neue,Helvetica,Arial,sans-serif,Khmer Os Battambang");
     	$("body").css("font-size","14px");
     	$("body .form-control").css("font-size","14px");
+    	$("body .input-sm").css("font-size","13px");
     	$("body .form-control-sm").css("font-size","13px");
-    	lang="kh";
-    	changeLang("kh");
-    	$("#langDrop").attr("data-lng","kh");
-    	
+    	lang="en";
+    	changeLang("en");
+    	$("#langDrop").attr("data-lng","en");
+    	$("#langDrop").html('<img style="width: 28px;" alt="" src="'+$("#base_url").val()+'assets/image/english.png"/>');
     }
 	
 
@@ -202,7 +338,56 @@ function isNull(dat) {
 }
 
 
+function getUserMenu(){
+	$.ajax({
+		type: "POST",
+		url: $("#base_url").val() +"Menu/getMenuUser",
+		dataType: 'json',
+		async: false,
+		success: function(res) {
+			$("#divMenu").html("");
+			var checkPreant1= false;
+			var checkPreant2= false
+			for(var i=0; i<res["menu_user"].length; i++){
+				
+				var datarow = res["menu_user"][i];
+				//-- fix data to add parent menu
+				if(datarow["menu_group"] == "1" && checkPreant1 == false){
+					$("#divMenu").append('<li class="header">MAIN NAVIGATION</li>');
+					checkPreant1 = true;
+				}
+				//-- fix data to add parent menu
+				if(datarow["menu_group"] == "2" && checkPreant2 == false){
+					$("#divMenu").append('<li class="header">PRODUCT NAVIGATION</li>');
+					checkPreant2 = true;
+				}
+				var menuNm = (getCookie("lang") == "kh" ? datarow["menu_nm_kh"] : datarow["menu_nm"]);
+				var menuActiveId = $("#menu_active").val();
+				var activeClass="";
+				var styleFont="font-weight: 500;";
+				if(menuActiveId == datarow["menu_nm"]){
+					activeClass = "active";
+					styleFont="font-weight: 600;";
+				}
+				var htmlMenu = '<li class="'+activeClass+'">';
+				htmlMenu += '<a style="'+styleFont+'" href="'+datarow["menu_nm"]+'">';
+				htmlMenu += '<i class="'+datarow["menu_icon_nm"]+'"></i> <span>'+menuNm+'</span>';
+				htmlMenu += '</a>';
+				htmlMenu += '</li>';
+
+				$("#divMenu").append(htmlMenu);
+			}
+			
+		},
+		error : function(data) {
+			console.log(data);
+			stock.comm.alertMsg($.i18n.prop("msg_err"));
+        }
+	});
+}
+
 </script>
+
 
 
 

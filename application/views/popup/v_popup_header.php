@@ -69,7 +69,9 @@
         top: -10px;
         background: #f4f4f4;
     }
-   
+   	.cur-pointer{
+   		cursor: pointer;
+   	}
   </style>
 </head>
 <body>

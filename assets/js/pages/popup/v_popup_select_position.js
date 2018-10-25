@@ -23,7 +23,7 @@ var _thisPage = {
 	},event : function(){
 		$("#btnClose,#btnExit").click(function(e){
 			
-			parent.parent.stock.comm.closePopUpForm("PopupSelectBranch");
+			parent.parent.stock.comm.closePopUpForm("PopupSelectPosition");
 			
 		});
 		//
@@ -128,7 +128,7 @@ var _thisPage = {
 				parentFrame= $("#parentId").val();
 				callbackFunction=parent.$("#"+parentFrame)[0].contentWindow.selectBranchCallback
 			}
-			parent.stock.comm.closePopUpForm("PopupSelectBranch",callbackFunction,data);
+			parent.stock.comm.closePopUpForm("PopupSelectPosition",callbackFunction,data);
 		});
 		
 		//
@@ -144,7 +144,7 @@ var _thisPage = {
 				parentFrame= $("#parentId").val();
 				callbackFunction=parent.$("#"+parentFrame)[0].contentWindow.selectBranchCallback
 			}
-			parent.stock.comm.closePopUpForm("PopupSelectBranch",callbackFunction,data);
+			parent.stock.comm.closePopUpForm("PopupSelectPosition",callbackFunction,data);
 		});
 	}
 };
