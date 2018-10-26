@@ -37,6 +37,7 @@ class Position extends CI_Controller{
             'pos_nm_kh' => $this->input->post('posNmKh'),
             'limit'     => $this->input->post('limit'),
             'offset'    => $this->input->post('offset'),
+            'srch_all' 	=> $this->input->post('srchAll')
         );
         
         $data["OUT_REC"] = $this->M_position->selectPositionData($dataSrch);

@@ -32,7 +32,7 @@
                                 	<input type="text" class="form-control input-sm" disabled="disabled" id="txtBraNm" name="txtBraNm">
                                     <span id="btnPopupBranch" class="input-group-addon label-warning" style="cursor: pointer;border-color: #f39c12 !important;"><i class="fa fa-search-plus"></i></span>
                                 </div>
-                                <input type="hidden" class="form-control input-sm" disabled="disabled" id="txtBraId" name="txtBraId">
+                                <input type="hidden" id="txtBraId" name="txtBraId">
                 			</div>
                 			<!--  -->
                 			<div class="form-group">
@@ -48,6 +48,7 @@
                                 	<input type="text" class="form-control input-sm" disabled="disabled" id="txtPosNm" name="txtPosNm">
                                     <span id="btnPopupPosition" class="input-group-addon label-warning" style="cursor: pointer;border-color: #f39c12 !important;"><i class="fa fa-search-plus"></i></span>
                                 </div>
+                                <input type="hidden" id="txtPosId" name="txtPosId">
                 			</div>
                 			<!--  -->
                 			<div class="form-group">

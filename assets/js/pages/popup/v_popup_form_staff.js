@@ -179,3 +179,8 @@ function selectBranchCallback(data){
 	$("#txtBraNm").val(data["bra_nm"]);
 	$("#txtBraId").val(data["bra_id"]);
 }
+
+function selectPositionCallback(data){
+	$("#txtPosNm").val(data["pos_nm"]);
+	$("#txtPosId").val(data["pos_id"]);
+}

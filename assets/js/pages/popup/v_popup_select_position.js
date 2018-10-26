@@ -11,7 +11,7 @@ var _thisPage = {
 		_this.onload();
 		_this.event();
 		//
-	    stock.comm.checkAllTblChk("chkAllBranch","tblBranch","chk_box");
+	    stock.comm.checkAllTblChk("chkAllPosition","tblPosition","chk_box");
 	},
 	onload : function(){
 		parent.parent.$("#loading").hide();
@@ -29,31 +29,31 @@ var _thisPage = {
 		//
 		$("#btnAddNew").click(function(){
 		    parent.$("#loading").show();
-			var controllerNm = "PopupFormBranch";
+			var controllerNm = "PopupFormPosition";
 			var option={};
-			option["height"] = "460px";
+			option["height"] = "320px";
 			var data="parentId="+"ifameStockSelect";
 			
-			parent.stock.comm.openPopUpForm(controllerNm,option, data,null,"modalMdBranch","modalMdContentBranch","ifameStockFormBranch");
+			parent.stock.comm.openPopUpForm(controllerNm,option, data,null,"modalMdPosition","modalMdContentPosition","ifameStockFormPosition");
 		});
 		
 		
 		//
 		$("#btnEdit").click(function(){
-			var chkVal = $('#tblBranch tbody tr td.chk_box input[type="checkbox"]:checked');
+			var chkVal = $('#tblPosition tbody tr td.chk_box input[type="checkbox"]:checked');
 			if(chkVal.length != 1){
 			    parent.stock.comm.alertMsg($.i18n.prop("msg_con_edit1"));
 				return;
 			}
 			
 			var tblTr = chkVal.parent().parent();
-			var braId=tblTr.attr("data-id");
-			editData(braId);
+			var posId=tblTr.attr("data-id");
+			editData(posId);
 		});
 		
 		//
 		$("#btnDelete").click(function(e){
-			var chkVal = $('#tblBranch tbody tr td.chk_box input[type="checkbox"]:checked');
+			var chkVal = $('#tblPosition tbody tr td.chk_box input[type="checkbox"]:checked');
 			
 			if(chkVal.length <=0){
 				parent.stock.comm.alertMsg($.i18n.prop("msg_con_del"));
@@ -69,8 +69,8 @@ var _thisPage = {
 				chkVal.each(function(i){
 					var delData={};
 					var tblTr = $(this).parent().parent();
-					var braId=tblTr.attr("data-id");
-					delData["braId"] = braId;
+					var posId=tblTr.attr("data-id");
+					delData["posId"] = posId;
 					delArr.push(delData);
 				});
 				
@@ -111,7 +111,7 @@ var _thisPage = {
 		});
 		//
 		$("#btnChoose").click(function(e) {
-			var chkVal = $('#tblBranch tbody tr td.chk_box input[type="checkbox"]:checked');
+			var chkVal = $('#tblPosition tbody tr td.chk_box input[type="checkbox"]:checked');
 			if(chkVal.length != 1){
 			    parent.stock.comm.alertMsg($.i18n.prop("msg_con_choose1"));
 				return;
@@ -119,30 +119,30 @@ var _thisPage = {
 			
 			var tblTr = chkVal.parent().parent();
 			var data={};
-			data["bra_nm"] = tblTr.find("td.bra_nm").html();
-			data["bra_id"] = tblTr.attr("data-id");
+			data["pos_nm"] = tblTr.find("td.pos_nm").html();
+			data["pos_id"] = tblTr.attr("data-id");
 			
 			var parentFrame="";
 			var callbackFunction=null;
 			if($("#parentId").val() !="" && $("#parentId").val() !=null){
 				parentFrame= $("#parentId").val();
-				callbackFunction=parent.$("#"+parentFrame)[0].contentWindow.selectBranchCallback
+				callbackFunction=parent.$("#"+parentFrame)[0].contentWindow.selectPositionCallback
 			}
 			parent.stock.comm.closePopUpForm("PopupSelectPosition",callbackFunction,data);
 		});
 		
 		//
-		$("#tblBranch tbody").on("dblclick", "tr td:not(.chk_box,.act_btn)", function() {
+		$("#tblPosition tbody").on("dblclick", "tr td:not(.chk_box,.act_btn)", function() {
 			var tblTr = $(this).parent();
 			var data={};
-			data["bra_nm"] = tblTr.find("td.bra_nm").html();
-			data["bra_id"] = tblTr.attr("data-id");
+			data["pos_nm"] = tblTr.find("td.pos_nm").html();
+			data["pos_id"] = tblTr.attr("data-id");
 			
 			var parentFrame="";
 			var callbackFunction=null;
 			if($("#parentId").val() !="" && $("#parentId").val() !=null){
 				parentFrame= $("#parentId").val();
-				callbackFunction=parent.$("#"+parentFrame)[0].contentWindow.selectBranchCallback
+				callbackFunction=parent.$("#"+parentFrame)[0].contentWindow.selectPositionCallback
 			}
 			parent.stock.comm.closePopUpForm("PopupSelectPosition",callbackFunction,data);
 		});
@@ -152,7 +152,7 @@ var _thisPage = {
 function getData(){
 	var dat={};
 	//paging
-    dat["perPage"] = _perPage;
+    dat["limit"] = _perPage;
     dat["offset"] = _perPage * ( _pageNo - 1);
     //searching
     dat["srchAll"] = $("#txtSearch").val().trim();	
@@ -160,35 +160,30 @@ function getData(){
     parent.$("#loading").show();
     $.ajax({
 		type: "POST",
-		url: $("#base_url").val() +"Branch/getBranch",
+		url: $("#base_url").val() +"Position/getPositionData",
 		data: dat,
 		dataType: "json",
-		success: function(res) {
+		success: function(data) {
 			parent.$("#loading").hide();
 			if(dat["offset"] == 0){
-				$("#tblBranch tbody").html("");
+				$("#tblPosition tbody").empty();
 			}
-			
-			if(res.OUT_REC != null && res.OUT_REC.length >0){
-			    for(var i=0; i<res.OUT_REC.length;i++){
-			        var html = "<tr data-id='"+res.OUT_REC[i]["bra_id"]+"'>";
-			        html += "<td class='chk_box'><input type='checkbox'></td>";
-			        html += "<td class='bra_nm cur-pointer'>"+res.OUT_REC[i]["bra_nm"]+"</td>";
-			        html += "<td class='bra_nm_kh cur-pointer'>"+res.OUT_REC[i]["bra_nm_kh"]+"</td>";
-			        html += "<td class='bra_type_nm cur-pointer'>"+(getCookie("lang") == "kh" ? res.OUT_REC[i]["bra_type_nm_kh"] : res.OUT_REC[i]["bra_type_nm"])+"</td>";
-			        //html += "<td class='act_btn text-center'><button onclick='deleteData("+res.OUT_REC[i]["bra_id"]+")' type='button' class='btn btn-danger btn-xs'><i class='fa fa-trash' aria-hidden='true'></i></button>&nbsp;<button onclick='editData("+res.OUT_REC[i]["bra_id"]+")' type='button' class='btn btn-primary btn-xs'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></button></td>";
-			        html += "<td class='act_btn text-center'><button onclick='editData("+res.OUT_REC[i]["bra_id"]+")' type='button' class='btn btn-primary btn-xs'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></button></td>";
-			
-			        html += "</tr>";
-			        
-			        $("#tblBranch tbody").append(html);
-			    }    
-			    
+			var html = "";
+			if(data.OUT_REC.length > 0){
+				$.each(data.OUT_REC, function(i,v){
+					html += '<tr data-id='+v.pos_id+'>';
+					html += '  	<td class="chk_box"><input type="checkbox"></td>';
+					html += '  	<td class="pos_nm">'+v.pos_nm+'</td>';
+					html += ' 	<td class="pos_nm_kh">'+v.pos_nm_kh+'</td>';							
+					html += '	<td class="text-center act_btn"><button onclick="editData('+v.pos_id+')" type="button" class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></td>';
+					html += '</tr>';
+				});
+				$("#tblPosition tbody").append(html);
+				$("#chkAll").prop("checked",false);
 			}else{
-				if($("#tblBranch tbody tr").length <= 0){
-					$("#tblBranch tbody").append("<tr><td colspan='5' style='    text-align: center;'>"+$.i18n.prop("lb_no_data")+"</td></tr>");
+				if($("#tblPosition tbody tr").length <= 0){
+					$("#tblPosition tbody").append("<tr><td colspan='6' style='text-align:center;'>"+$.i18n.prop("lb_no_data")+"</td></tr>");
 				}
-			    
 			}
 			
 		},
@@ -207,7 +202,7 @@ function deleteData(bra_id){
 		var delObj={};
 		var delData={};
 		
-		delData["braId"] = bra_id;
+		delData["posId"] = bra_id;
 		delArr.push(delData);
 		delObj["delObj"]= delArr;
 		//
@@ -219,10 +214,10 @@ function editData(bra_id){
 	var data="id="+bra_id;
 	data+="&action=U";
 	data+="&parentId="+"ifameStockSelect";
-	var controllerNm = "PopupFormBranch";
+	var controllerNm = "PopupFormPosition";
 	var option={};
-	option["height"] = "460px";
-    parent.stock.comm.openPopUpForm(controllerNm,option, data,null,"modalMdBranch","modalMdContentBranch","ifameStockFormBranch");
+	option["height"] = "320px";
+    parent.stock.comm.openPopUpForm(controllerNm,option, data,null,"modalMdPosition","modalMdContentPosition","ifameStockFormPosition");
 }
 
 /**
@@ -232,13 +227,13 @@ function deleteDataArr(dataArr){
 
 	$.ajax({
 		type: "POST",
-		url: $("#base_url").val() +"Branch/delete",
+		url: $("#base_url").val() +"Position/deletePosition",
 		data: dataArr,
 		success: function(res) {
 		    if(res > 0){
 		        parent.stock.comm.alertMsg(res+$.i18n.prop("msg_del_com"));
 		        _pageNo=1;
-		    	_perPage=$("#tblBranch tbody tr").length;
+		    	_perPage=$("#tblPosition tbody tr").length;
 		        getData();
 		    }else{
 		        parent.stock.comm.alertMsg($.i18n.prop("msg_err_del"));
@@ -266,8 +261,8 @@ function resetFormSearch(){
 /**
  * 
 */
-function popupBranchCallback(){
+function popupPositionCallback(){
 	_pageNo=1;
-	_perPage=$("#tblBranch tbody tr").length;
+	_perPage=$("#tblPosition tbody tr").length;
     getData();
 }
