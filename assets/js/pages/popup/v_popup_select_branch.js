@@ -146,6 +146,8 @@ var _thisPage = {
 			}
 			parent.stock.comm.closePopUpForm("PopupSelectBranch",callbackFunction,data);
 		});
+		
+		
 	}
 };
 

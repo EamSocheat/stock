@@ -36,21 +36,27 @@ class Staff extends CI_Controller {
 	    }
 	    
 		$data = array(
-            'bra_nm' 		=> $this->input->post('braNm'),
-            'bra_nm_kh' 	=> $this->input->post('braNmKh'),
-            'bra_phone1'	=> $this->input->post('braPhone'),
-            'bra_phone2'	=> $this->input->post('braPhone2'),
-            'bra_email'		=> $this->input->post('braEmail'),
-            'bra_addr'		=> $this->input->post('braAddr'),
-			'bra_des'		=> $this->input->post('braDes'),
+            'bra_id' 		=> $this->input->post('txtBraId'),
+            'pos_id' 		=> $this->input->post('txtPosId'),
+            'sta_nm'		=> $this->input->post('txtStaffNmKh'),
+            'sta_nm_kh'		=> $this->input->post('staNmKh'),
+            'sta_gender'	=> $this->input->post('staGender'),
+            'sta_dob'		=> $this->input->post('staDob'),
+			'sta_addr'		=> $this->input->post('staAddr'),
+			'sta_phone1'	=> $this->input->post('staPhone1'),
+			'sta_phone2'	=> $this->input->post('staPhone2'),
+			'sta_email'		=> $this->input->post('staEmail'),
+			'sta_start_dt'	=> $this->input->post('staStartDt'),
+			'sta_end_dt'	=> $this->input->post('staEndDt'),
+			'sta_des'		=> $this->input->post('staDes'),
 			'useYn'			=> "Y",
-            'bra_type_id'	=> $this->input->post('braType'),
             'com_id'		=> $_SESSION['comId']
         );
-        
+        echo($this->input->post('txtBraId')."AAA");
+        /*
         if($this->input->post('braId') != null && $this->input->post('braId') != ""){
             //update data
-            $data['bra_id'] = $this->input->post('braId');
+            $data['sta_id'] = $this->input->post('staId');
             $data['upUsr'] = $_SESSION['usrId'];
             $data['upDt'] = date('Y-m-d H:i:s');
             $this->M_branch->update($data);
@@ -62,7 +68,7 @@ class Staff extends CI_Controller {
             $this->M_branch->insert($data);
         
         }
-	    
+	    */
 	    echo 'OK';
 	}
 	
