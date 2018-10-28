@@ -43,7 +43,7 @@ class Supplier extends CI_Controller{
         $data["OUT_REC_CNT"] = $this->M_supplier->countSupplierData($dataSrch);
         echo json_encode($data);
     }
-    
+     
     public function insertSupplierData(){
         if(!$this->M_check_user->check()){
             redirect('/Login');

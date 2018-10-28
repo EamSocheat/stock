@@ -44,7 +44,7 @@
 		    }
 		    
 		    return $this->db->get()->result();
-		}
+		} 
 		
 		public function updateSupplierDB($data){
 		    $this->db->where('sup_id', $data['sup_id']);

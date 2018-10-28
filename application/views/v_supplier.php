@@ -121,7 +121,7 @@
     					</tr>
 					</thead>
 					<tbody id="supplList">
-					<!-- <tr>
+					<!-- <tr> 
 							<td><input type="checkbox"></td>
 							<td><div>Supplier 000001</div></td>
 							<td><div>ក្រុមហ៊ុនដឹកជញ្ជូន 000001</div></td>

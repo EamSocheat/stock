@@ -70,7 +70,7 @@ var _thisPage = {
 			});
 			$("#btnSave").click(function(){
 				_btnId = $(this).attr("id");
-			});
+			}); 
 			$("#btnSaveNew").click(function(){
 				_btnId = $(this).attr("id");
 			});

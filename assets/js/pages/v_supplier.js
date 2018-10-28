@@ -64,7 +64,7 @@ var _thisPage = {
 						$("#supplList").append("<tr><td colspan='6' style='text-align:center;'>No data to show.</td></tr>");
 						stock.comm.renderPaging("paging", $("#perPage").val(), 0, pageNo);
 					}
-					
+					 
 				}, error : function(data) {
 				    $("#loading").hide();
 				    stock.comm.alertMsg($.i18n.prop("msg_err"));

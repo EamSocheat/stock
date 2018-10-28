@@ -9,7 +9,7 @@
               <span aria-hidden="true">&times;</span></button>
             <h4 class="modal-title" id="popupTitle"></h4>
           </div>
-          
+           
           <div class="modal-body" id="modalMdBody">
           		<!-- modal body  -->
             	<div class="row">

@@ -98,7 +98,7 @@ class Position extends CI_Controller{
             
             if($cntActive > 0){
                 continue;
-            }else{
+            }else{ 
                 $data = array(
                     'pos_id'    => $delObj[$i]['posId'],
                     'useYn'		=> "N",
