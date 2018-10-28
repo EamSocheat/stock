@@ -25,7 +25,7 @@ class Supplier extends CI_Controller{
         
         $this->load->view('v_supplier',$data);
     }
-    
+     
     public function getSupplierData(){
         if(!$this->M_check_user->check()){
             redirect('/Login');
