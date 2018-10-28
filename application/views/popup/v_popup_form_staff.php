@@ -1,9 +1,9 @@
 <?php include 'v_popup_header.php';?>
 		  <!-- general form elements -->
-		  <input type="hidden" id="braId" name="braId" value="<?php if(isset($_GET["id"])){ echo $_GET["id"]; }?>"/>
+		  <input type="hidden" id="staId" name="staId" value="<?php if(isset($_GET["id"])){ echo $_GET["id"]; }?>"/>
 		  <input type="hidden" id="frmAct" name="frmAct" value="<?php if(isset($_GET["action"])){ echo $_GET["action"]; }?>"/>
 		  <!-- form start -->
-          <form role="form" class="form-horizontal" id="frmBranch" action="" style="display: none">
+          <form role="form" class="form-horizontal" id="frmStaff" action="" style="display: none">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnExit">
               <span aria-hidden="true">&times;</span></button>
@@ -16,9 +16,9 @@
             	<div class="row">
             		<div class="col-xs-12 row" style="padding:0px; margin-bottom: 20px;">
             		
-            			<div class="col-xs-4 padding-forms-left">
+            			<div class="col-xs-4 padding-forms-left" style="padding-left: 35px;">
                 			<div class="image" style="text-align: center">
-                            	<img src="<?php echo base_url('assets/image/default-staff-photo.png') ?>" class="img-circle" style="width: 150px;" alt="User Image">
+                            	<img id="staImgView" src="<?php echo base_url('assets/image/default-staff-photo.png') ?>" class="img-circle" style="width: 150px;" alt="User Image">
                             </div>
                             <div style="text-align: center;margin-top: 5px;">
                             	<button  type="button" class="btn btn-info btn-xs" id="btnSelectPhoto"><i class="fa fa-image" aria-hidden="true"></i> <span data-i18ncd="lb_select_img">Select Image</span></button>
@@ -32,7 +32,7 @@
                                 	<input type="text" class="form-control input-sm" disabled="disabled" id="txtBraNm" name="txtBraNm">
                                     <span id="btnPopupBranch" class="input-group-addon label-warning" style="cursor: pointer;border-color: #f39c12 !important;"><i class="fa fa-search-plus"></i></span>
                                 </div>
-                                <input type="hidden" class="form-control input-sm" disabled="disabled" id="txtBraId" name="txtBraId">
+                                <input type="hidden" id="txtBraId" name="txtBraId">
                 			</div>
                 			<!--  -->
                 			<div class="form-group">
@@ -48,11 +48,12 @@
                                 	<input type="text" class="form-control input-sm" disabled="disabled" id="txtPosNm" name="txtPosNm">
                                     <span id="btnPopupPosition" class="input-group-addon label-warning" style="cursor: pointer;border-color: #f39c12 !important;"><i class="fa fa-search-plus"></i></span>
                                 </div>
+                                <input type="hidden" id="txtPosId" name="txtPosId">
                 			</div>
                 			<!--  -->
                 			<div class="form-group">
-                               	<label for="braNmKh" data-i18ncd="lb_name_kh">Khmer Name</label>
-                            	<input type="text" class="form-control" id="braNmKh" name="braNmKh" required="required">
+                               	<label for="txtStaffNmKh" data-i18ncd="lb_name_kh">Khmer Name</label>
+                            	<input type="text" class="form-control" id="txtStaffNmKh" name="txtStaffNmKh" required="required">
                             </div>
                 		</div>
                 		
@@ -63,7 +64,10 @@
                 		<div class="col-xs-4 padding-forms-left">
                 			<div class="form-group">
                               <label for="staGender" data-i18ncd="staGender">Gender</label>
-                              <input type="text" class="form-control" id="staGender" name="staGender" required="required">
+                              <select class="form-control">
+	                    			<option value="M">Male</option>
+			                    	<option value="F" selected>Female</option>
+			                  </select>
                             </div>
                 		</div>
                 		<div class="col-xs-4 padding-forms-right">
@@ -75,7 +79,7 @@
                 		<div class="col-xs-4 padding-forms-right">
                 			<div class="form-group">
                                	<label for="staAddr" data-i18ncd="staAddr">Address</label>
-                            	<input type="text" class="form-control" id="staAddr" name="staAddr" required="required">
+                            	<input type="text" class="form-control" id="staAddr" name="staAddr">
                             </div>
                 		</div>
                 		
@@ -106,19 +110,19 @@
                 		<div class="col-xs-4 padding-forms-left">
                 			<div class="form-group">
                 				<label for="staStartDate" data-i18ncd="staStartDate">Start Date</label>
-                              	<input type="email" class="form-control" id="staStartDate" name="staStartDate" />
+                              	<input type="text" class="form-control" id="staStartDate" name="staStartDate" />
                 			</div>
                 		</div>
                 		<div class="col-xs-4 padding-forms-right">
                 			<div class="form-group">
                 				<label for="staEndDate" data-i18ncd="staEndDate">Stop Date</label>
-                              	<input type="email" class="form-control" id="staEndDate" name="staEndDate" />
+                              	<input type="text" class="form-control" id="staEndDate" name="staEndDate" />
                 			</div>
                 		</div>
                 		<div class="col-xs-4 padding-forms-right">
                 			<div class="form-group">
                 				<label for="staDes" data-i18ncd="staDes">Description</label>
-                              	<input type="email" class="form-control" id="staDes" name="staDes" />
+                              	<input type="text" class="form-control" id="staDes" name="staDes" />
                 			</div>
                 		</div>
                 	</div>

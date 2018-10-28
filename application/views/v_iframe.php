@@ -53,3 +53,21 @@
 </form>
 <!-- /.modal -->
 
+
+<!--  -->
+<iframe id="ifameStockFormPosition" src="" style="display: none;    width: 100%;overflow: hidden;height: 100%;border: none;"></iframe>
+<!--  -->
+<!-- modal add edit branch2-->
+<form id="frmSelect" action="post" method="#">
+<div class="modal fade" id="modalMdPosition">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content" id="modalMdContentPosition">
+      
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+</form>
+<!-- /.modal -->
+

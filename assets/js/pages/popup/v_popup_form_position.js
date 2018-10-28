@@ -10,7 +10,6 @@ var _thisPage = {
 			_this = this;
 			parent.$("#loading").hide();
 			_this.event();
-			top.$("#modalMdContent").height(321);
 			if($("#posId").val() != ""){
 			    _thisPage.fillData($("#posId").val());
 			    $("#popupTitle").html("<i class='fa fa-user-plus'></i> "+$.i18n.prop("btn_edit")+" "+ $.i18n.prop("lb_position"));
@@ -51,7 +50,16 @@ var _thisPage = {
 						if(str == "new"){
 						    clearForm();
 						}else{
-						    parent.stock.comm.closePopUpForm("PopupFormPosition", parent.popupPositionCallback);
+							var parentFrame="";
+							var callbackFunction=null;
+							if($("#parentId").val() !="" && $("#parentId").val() !=null){
+								parentFrame= $("#parentId").val();
+								callbackFunction=parent.$("#"+parentFrame)[0].contentWindow.popupPositionCallback
+							}else{
+								callbackFunction=parent.popupBranchCallback;
+							}
+							
+							parent.stock.comm.closePopUpForm("PopupFormPosition", callbackFunction);
 						}
 					}
 				},
@@ -62,7 +70,16 @@ var _thisPage = {
 			});
 		}, event : function(){
 			$("#btnClose, #btnExit").click(function(e){
-				parent.stock.comm.closePopUpForm("PopupFormPosition", parent.popupPositionCallback);
+				var parentFrame="";
+				var callbackFunction=null;
+				if($("#parentId").val() !="" && $("#parentId").val() !=null){
+					parentFrame= $("#parentId").val();
+					callbackFunction=parent.$("#"+parentFrame)[0].contentWindow.popupPositionCallback
+				}else{
+					callbackFunction=parent.popupBranchCallback;
+				}
+				
+				parent.stock.comm.closePopUpForm("PopupFormPosition", callbackFunction);
 			});
 			$("#btnSave").click(function(){
 				_btnId = $(this).attr("id");

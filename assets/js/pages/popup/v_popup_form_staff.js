@@ -13,7 +13,6 @@ var _thisPage = {
 		},
 		onload : function(){
 			parent.$("#loading").hide();
-			getBrnachType();
 			clearForm();
 			if($("#frmAct").val() == "U"){
 			    getDataEdit($("#braId").val());
@@ -22,7 +21,7 @@ var _thisPage = {
 			    $("#btnSaveNew").show();
 			    $("#popupTitle").html("<i class='fa fa-home'></i> "+$.i18n.prop("btn_add_new")+" "+ $.i18n.prop("lb_branch"));
 			}
-			$("#frmBranch").show();
+			$("#frmStaff").show();
 			$("#braNm").focus();
 		},
 		event : function(){
@@ -32,7 +31,7 @@ var _thisPage = {
 				parent.stock.comm.closePopUpForm("PopupFormStaff",parent.popupStaffCallback);
 			});
 			//
-			$("#frmBranch").submit(function(e){
+			$("#frmStaff").submit(function(e){
 				e.preventDefault();
 				if(_btnId == "btnSave"){
 			    	saveData();
@@ -56,7 +55,11 @@ var _thisPage = {
 				$("#userfile").trigger( "click" );
 				
 			});
-			
+			//
+			$("#userfile").change(function(){
+			    readURL(this);
+			});
+			//
 			//
 			$("#btnPopupBranch").click(function(e){
 				var data="parentId=ifameStockForm";
@@ -77,43 +80,18 @@ var _thisPage = {
 			    stock.comm.openPopUpSelect(controllerNm,option, data,"modal-md");
 			});
 			
+			
 		}
 };
 
 
-function getBrnachType(){
-	$.ajax({
-		type: "POST",
-		url: $("#base_url").val() +"Branch/getBranchType",
-		dataType: 'json',
-		async: false,
-		success: function(res) {
-			if(res.OUT_REC.length > 0){
-				$("#braType option").remove();
-				for(var i=0; i<res.OUT_REC.length; i++){
-					var braNm = (parent.getCookie("lang") == "kh" ? res.OUT_REC[i]["bra_nm_kh"] : res.OUT_REC[i]["bra_nm"]);
-					$("#braType").append("<option value='"+res.OUT_REC[i]["bra_type_id"]+"'>"+braNm+"</option>");
-				}
-				
-			}else{
-				console.log(res);
-				stock.comm.alertMsg($.i18n.prop("msg_err"));
-			}
-		},
-		error : function(data) {
-			console.log(data);
-			stock.comm.alertMsg($.i18n.prop("msg_err"));
-        }
-	});
-}
-
-
 function saveData(str){
     parent.$("#loading").show();
+    console.log($("#frmStaff").serialize());
 	$.ajax({
 		type: "POST",
-		url: $("#base_url").val() +"Branch/save",
-		data: $("#frmBranch").serialize()+ "&braId=" +$("#braId").val(),
+		url: $("#base_url").val() +"Staff/save",
+		data: $("#frmStaff").serialize()+ "&staId=" +$("#staId").val(),
 		success: function(res) {
 		    parent.$("#loading").hide();
 			if(res =="OK"){
@@ -169,13 +147,34 @@ function getDataEdit(bra_id){
 }
 
 function clearForm(){
-    $("#frmBranch input").val("");
-    $("#frmBranch textarea").val("");
+    $("#frmStaff input").val("");
+    $("#frmStaff textarea").val("");
     
-    $("#braNm").focus();
+    $("#staNm").focus();
 }
 
 function selectBranchCallback(data){
 	$("#txtBraNm").val(data["bra_nm"]);
 	$("#txtBraId").val(data["bra_id"]);
 }
+
+function selectPositionCallback(data){
+	$("#txtPosNm").val(data["pos_nm"]);
+	$("#txtPosId").val(data["pos_id"]);
+}
+
+/**
+ * 
+ */
+//
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        
+        reader.onload = function (e) {
+            $('#staImgView').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+

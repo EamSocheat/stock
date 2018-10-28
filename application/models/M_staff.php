@@ -15,9 +15,10 @@
         	return $this->db->get()->result();;
 		}
 
-		public function update($id,$data){
-			$this->db->where('com_id', $id);
-			$this->db->update('tbl_company', $data);
+		public function update($data){
+			$this->db->where('com_id', $data["com_id"]);
+			$this->db->where('sta_id', $data["sta_id"]);
+			$this->db->update('tbl_staff', $data);
 		}
 		
 		public function insert($data){

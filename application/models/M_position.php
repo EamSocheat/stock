@@ -25,7 +25,13 @@
         	    $this->db->like('tbl_position.pos_nm_kh', $dataSrch['pos_nm_kh']);
         	}
         	
-        	$this->db->order_by("com_id", "pos_des");
+        	//
+        	if($dataSrch['srch_all'] != null && $dataSrch['srch_all'] != ""){
+        		$this->db->like('tbl_position.pos_nm', $dataSrch['srch_all']);
+        	    $this->db->or_like('tbl_position.pos_nm_kh', $dataSrch['srch_all']);
+        	}
+        	
+        	$this->db->order_by("pos_id", "desc");
         	return $this->db->get('tbl_position',$dataSrch['limit'],$dataSrch['offset'])->result();
 		}
 

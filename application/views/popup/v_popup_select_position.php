@@ -8,7 +8,7 @@
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btnExit">
               <span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="popupTitle"><i class="fa fa-home"></i> <span data-i18ncd="pop_select_branch">Select Branch</span></h4>
+            <h4  class="modal-title" id="popupTitle"><i class="fa fa-user-plus"></i> <span data-i18ncd="pop_select_position">Choose Position</span></h4>
           </div>
           
           <div class="modal-body" id="modalMdBody">
@@ -36,21 +36,19 @@
     				<!-- /.button -->
     				<br>
     				<div class="box-body table-responsive fix-header-tbl" style="height: 235px;">
-    				  <table class="table table-hover" id="tblBranch" >
-    				    <thead>  
-        					<tr>
-        					  <th><input type="checkbox" id="chkAllBranch"></th>
-        					  <th data-i18ncd="lb_name">Name</th>
-        					  <th data-i18ncd="lb_name_kh">Khmer Name</th>
-        					  <th data-i18ncd="lb_branch_type">Type</th>
-        					  <th data-i18ncd="lb_action">Action</th>
-        					</tr>
-    					</thead>
-    					<tbody>
-    					   
-    					</tbody>
-    					
-    				  </table>
+    				  <table class="table table-hover" id="tblPosition">
+					    <thead>  
+	    					<tr>
+	    					  <th><input type="checkbox" id="chkAllPosition"></th>
+	    					  <th data-i18ncd="lb_name">Name</th>
+	    					  <th data-i18ncd="lb_name_kh">Khmer Name</th>
+	    					  <th data-i18ncd="lb_action">Action</th>
+	    					</tr>
+						</thead>
+						<tbody>
+							
+	   					</tbody>
+					  </table>
     				</div>
     				<!-- /.box-body -->
             	</div>
@@ -65,4 +63,4 @@
           <!-- form end --> 
           <!-- end general form elements -->
 <?php include 'v_popup_footer.php';?>
-<script src="<?php echo base_url('assets/') ?>js/pages/popup/v_popup_select_branch.js"></script>
+<script src="<?php echo base_url('assets/') ?>js/pages/popup/v_popup_select_position.js"></script>
