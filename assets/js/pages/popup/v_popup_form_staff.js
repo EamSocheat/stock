@@ -86,12 +86,15 @@ var _thisPage = {
 
 
 function saveData(str){
+	$("#staId").appendTo("#frmStaff");
     parent.$("#loading").show();
-    console.log($("#frmStaff").serialize());
 	$.ajax({
 		type: "POST",
 		url: $("#base_url").val() +"Staff/save",
-		data: $("#frmStaff").serialize()+ "&staId=" +$("#staId").val(),
+		data: new FormData($("#frmStaff")[0]),
+		cache: false,
+        contentType: false,
+        processData: false,
 		success: function(res) {
 		    parent.$("#loading").hide();
 			if(res =="OK"){

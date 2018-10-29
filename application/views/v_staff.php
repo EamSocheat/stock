@@ -110,27 +110,21 @@
 				
 				
 				<div class="box-body table-responsive">
-				  <table class="table table-hover" id="">
+				  <table class="table table-hover" id="tblStaff">
 				    <thead>  
     					<tr>
-    					  <th><input type="checkbox" id=""></th>
+    					  <th><input type="checkbox" id="chkAllBox"></th>
+    					  <th></th>
     					  <th data-i18ncd="lb_name">Name</th>
     					  <th data-i18ncd="lb_name_kh">Khmer Name</th>
+    					  <th data-i18ncd="lb_gender">Gender</th>
     					  <th data-i18ncd="lb_phone">Phone</th>
-    					  <th data-i18ncd="lb_email">Email</th>
-    					  <th data-i18ncd="lb_branch_type">Type</th>
+    					  <th data-i18ncd="lb_branch">Branch</th>
     					  <th data-i18ncd="lb_action">Action</th>
     					</tr>
 					</thead>
 					<tbody>
-					    <tr>
-    					  <td><input type="checkbox"></td>
-    					  <td>John Doe</td>
-    					  <td>Khmer</td>
-    					  <td>012346678</td>
-    					  <td>VVVV</td>
-    					  <td>AAAA</td>
-    					</tr>    					
+					 	<!-- -->				
 					</tbody>
 					
 				  </table>

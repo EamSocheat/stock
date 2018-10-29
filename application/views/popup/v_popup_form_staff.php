@@ -63,8 +63,8 @@
                 	<div class="col-xs-12 row" style="padding:0px">
                 		<div class="col-xs-4 padding-forms-left">
                 			<div class="form-group">
-                              <label for="staGender" data-i18ncd="staGender">Gender</label>
-                              <select class="form-control">
+                              <label for="cboGender" data-i18ncd="cboGender">Gender</label>
+                              <select class="form-control" id="cboGender" name="cboGender">
 	                    			<option value="M">Male</option>
 			                    	<option value="F" selected>Female</option>
 			                  </select>
@@ -72,14 +72,14 @@
                 		</div>
                 		<div class="col-xs-4 padding-forms-right">
                 			<div class="form-group">
-                               	<label for="staDob" data-i18ncd="staDob">DOB</label>
-                            	<input type="text" class="form-control" id="staDob" name="staDob" required="required">
+                               	<label for="txtDob" data-i18ncd="staDob">DOB</label>
+                            	<input type="text" class="form-control" id="txtDob" name="txtDob" required="required">
                             </div>
                 		</div>
                 		<div class="col-xs-4 padding-forms-right">
                 			<div class="form-group">
-                               	<label for="staAddr" data-i18ncd="staAddr">Address</label>
-                            	<input type="text" class="form-control" id="staAddr" name="staAddr">
+                               	<label for="txtAddr" data-i18ncd="txtAddr">Address</label>
+                            	<input type="text" class="form-control" id="txtAddr" name="txtAddr">
                             </div>
                 		</div>
                 		
@@ -88,20 +88,20 @@
                 	<div class="col-xs-12 row" style="padding:0px">
                 		<div class="col-xs-4 padding-forms-left">
                 			<div class="form-group">
-                              <label for="braPhone" data-i18ncd="lb_phone">Phone</label>
-                              <input type="text" class="form-control" id="braPhone" name="braPhone"  required="required">
+                              <label for="txtPhone1" data-i18ncd="lb_phone">Phone</label>
+                              <input type="text" class="form-control" id="txtPhone1" name="txtPhone1"  required="required">
                             </div>
                 		</div>
                 		<div class="col-xs-4 padding-forms-right">
                 			<div class="form-group">
-                              <label for="braPhone2" data-i18ncd="lb_phone2">Phone2</label>
-                              <input type="text" class="form-control" id="braPhone2" name="braPhone2" />
+                              <label for="txtPhone2" data-i18ncd="lb_phone2">Phone2</label>
+                              <input type="text" class="form-control" id="txtPhone2" name="txtPhone2" />
                             </div>
                 		</div>
                 		<div class="col-xs-4 padding-forms-right">
                 			<div class="form-group">
-                				<label for="braEmail" data-i18ncd="lb_email">Email</label>
-                              	<input type="email" class="form-control" id="braEmail" name="braEmail" />
+                				<label for="txtEmail" data-i18ncd="lb_email">Email</label>
+                              	<input type="email" class="form-control" id="txtEmail" name="txtEmail" />
                 			</div>
                 		</div>
                 	</div>
@@ -109,20 +109,20 @@
                 	<div class="col-xs-12 row" style="padding:0px">
                 		<div class="col-xs-4 padding-forms-left">
                 			<div class="form-group">
-                				<label for="staStartDate" data-i18ncd="staStartDate">Start Date</label>
-                              	<input type="text" class="form-control" id="staStartDate" name="staStartDate" />
+                				<label for="txtStartDate" data-i18ncd="staStartDate">Start Date</label>
+                              	<input type="text" class="form-control" id="txtStartDate" name="txtStartDate" />
                 			</div>
                 		</div>
                 		<div class="col-xs-4 padding-forms-right">
                 			<div class="form-group">
-                				<label for="staEndDate" data-i18ncd="staEndDate">Stop Date</label>
-                              	<input type="text" class="form-control" id="staEndDate" name="staEndDate" />
+                				<label for="txtStopDate" data-i18ncd="staEndDate">Stop Date</label>
+                              	<input type="text" class="form-control" id="txtStopDate" name="txtStopDate" />
                 			</div>
                 		</div>
                 		<div class="col-xs-4 padding-forms-right">
                 			<div class="form-group">
-                				<label for="staDes" data-i18ncd="staDes">Description</label>
-                              	<input type="text" class="form-control" id="staDes" name="staDes" />
+                				<label for="txtDes" data-i18ncd="staDes">Description</label>
+                              	<input type="text" class="form-control" id="txtDes" name="txtDes" />
                 			</div>
                 		</div>
                 	</div>

@@ -123,7 +123,7 @@ function getData(page_no){
     $("#loading").show();
     $.ajax({
 		type: "POST",
-		url: $("#base_url").val() +"Branch/getBranch",
+		url: $("#base_url").val() +"Staff/getStaff",
 		data: dat,
 		dataType: "json",
 		success: function(res) {
@@ -133,13 +133,13 @@ function getData(page_no){
 			    for(var i=0; i<res.OUT_REC.length;i++){
 			        var html = "<tr data-id='"+res.OUT_REC[i]["bra_id"]+"'>";
 			        html += "<td class='chk_box'><input type='checkbox'></td>";
-			        html += "<td class='bra_nm'>"+res.OUT_REC[i]["bra_nm"]+"</td>";
-			        html += "<td class='bra_nm_kh'>"+res.OUT_REC[i]["bra_nm_kh"]+"</td>";
-			        html += "<td class='bra_phone'>"+res.OUT_REC[i]["bra_phone1"]+"</td>";
-			        html += "<td class='bra_email'>"+res.OUT_REC[i]["bra_email"]+"</td>";
-			        html += "<td class='bra_type_nm'>"+(getCookie("lang") == "kh" ? res.OUT_REC[i]["bra_type_nm_kh"] : res.OUT_REC[i]["bra_type_nm"])+"</td>";
-			        //html += "<td class='act_btn text-center'><button onclick='deleteData("+res.OUT_REC[i]["bra_id"]+")' type='button' class='btn btn-danger btn-xs'><i class='fa fa-trash' aria-hidden='true'></i></button>&nbsp;<button onclick='editData("+res.OUT_REC[i]["bra_id"]+")' type='button' class='btn btn-primary btn-xs'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></button></td>";
-			        html += "<td class='act_btn text-center'><button onclick='editData("+res.OUT_REC[i]["bra_id"]+")' type='button' class='btn btn-primary btn-xs'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></button></td>";
+			        html += "<td class='sta_image'><img /></td>";
+			        html += "<td class='sta_nm'>"+res.OUT_REC[i]["sta_nm"]+"</td>";
+			        html += "<td class='sta_nm_kh'>"+res.OUT_REC[i]["sta_nm_kh"]+"</td>";
+			        html += "<td class='sta_gender'>"+res.OUT_REC[i]["sta_gender"]+"</td>";
+			        html += "<td class='sta_phone1'>"+res.OUT_REC[i]["sta_phone1"]+"</td>";
+			        html += "<td class='bra_nm'>"+(getCookie("lang") == "kh" ? res.OUT_REC[i]["bra_nm_kh"] : res.OUT_REC[i]["bra_nm"])+"</td>";
+			        html += "<td class='act_btn text-center'><button onclick='editData("+res.OUT_REC[i]["sta_id"]+")' type='button' class='btn btn-primary btn-xs'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></button></td>";
 			
 			        html += "</tr>";
 			        
@@ -148,7 +148,7 @@ function getData(page_no){
 			    //--pagination
 			    stock.comm.renderPaging("paging",$("#perPage").val(),res.OUT_REC_CNT[0]["total_rec"],pageNo);
 			}else{
-			    $("#tblStaff tbody").append("<tr><td colspan='7' style='    text-align: center;'>"+$.i18n.prop("lb_no_data")+"</td></tr>");
+			    $("#tblStaff tbody").append("<tr><td colspan='8' style='    text-align: center;'>"+$.i18n.prop("lb_no_data")+"</td></tr>");
 			    //--pagination
 			    stock.comm.renderPaging("paging",$("#perPage").val(),0,pageNo);
 			}
