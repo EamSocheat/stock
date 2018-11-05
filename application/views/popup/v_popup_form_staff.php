@@ -18,11 +18,11 @@
             		
             			<div class="col-xs-4 padding-forms-left" style="padding-left: 35px;">
                 			<div class="image" style="text-align: center">
-                            	<img id="staImgView" src="<?php echo base_url('assets/image/default-staff-photo.png') ?>" class="img-circle" style="width: 150px;" alt="User Image">
+                            	<img id="staImgView" src="<?php echo base_url('assets/image/default-staff-photo.png') ?>" class="img-circle" style="width: 150px;height: 150px;" alt="User Image">
                             </div>
                             <div style="text-align: center;margin-top: 5px;">
                             	<button  type="button" class="btn btn-info btn-xs" id="btnSelectPhoto"><i class="fa fa-image" aria-hidden="true"></i> <span data-i18ncd="lb_select_img">Select Image</span></button>
-                            	<input type="file" style="display: none" class="form-control" accept="image/*"  id="userfile" name="userfile">
+                            	<input type="file" style="display: none" class="form-control" accept="image/*"  id="fileStaPhoto" name="fileStaPhoto">
                             </div>
                 		</div>
                 		<div class="col-xs-4 padding-forms-right">

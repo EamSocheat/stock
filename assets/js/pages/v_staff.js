@@ -133,7 +133,7 @@ function getData(page_no){
 			    for(var i=0; i<res.OUT_REC.length;i++){
 			        var html = "<tr data-id='"+res.OUT_REC[i]["bra_id"]+"'>";
 			        html += "<td class='chk_box'><input type='checkbox'></td>";
-			        html += "<td class='sta_image'><img /></td>";
+			        html += "<td class='sta_image'><img style='width: 20px;' src='http://localhost/git/stock/assets/image/default-staff-photo.png' class='img-circle' /></td>";
 			        html += "<td class='sta_nm'>"+res.OUT_REC[i]["sta_nm"]+"</td>";
 			        html += "<td class='sta_nm_kh'>"+res.OUT_REC[i]["sta_nm_kh"]+"</td>";
 			        html += "<td class='sta_gender'>"+res.OUT_REC[i]["sta_gender"]+"</td>";

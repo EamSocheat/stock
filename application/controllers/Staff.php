@@ -11,6 +11,8 @@ class Staff extends CI_Controller {
 		$this->load->helper('form'); 
 		$this->load->model('M_branch');
 		$this->load->model('M_common');
+		$this->load->model('M_staff');
+		//$this->load->library('../controllers/upload');
 	}
 	public function index(){
 	    
@@ -34,45 +36,88 @@ class Staff extends CI_Controller {
 	    if(!$this->M_check_user->check()){
 	        redirect('/Login');
 	    }
-	    
+
+	    $staPhoto="";
+	    if(!empty($_FILES['fileStaPhoto']['name'])){
+	        $staPhoto = $this->M_common->uploadImage($_FILES['fileStaPhoto'],'fileStaPhoto','./upload/stock/staff');
+	    }
+	   /*  if(!empty($_FILES['fileStaPhoto']['name'])){
+	        if(!empty($_FILES['fileStaPhoto']['name'])){
+	            $filesCount = count($_FILES['fileStaPhoto']['name']);
+	            
+	            for($i = 0; $i < $filesCount; $i++){
+	               
+	                $_FILES['userfile']['name'] 		= $_FILES['fileStaPhoto']['name'][$i];
+	                $_FILES['userfile']['type'] 		= $_FILES['fileStaPhoto']['type'][$i];
+	                $_FILES['userfile']['tmp_name'] 	= $_FILES['fileStaPhoto']['tmp_name'][$i];
+	                $_FILES['userfile']['error'] 		= $_FILES['fileStaPhoto']['error'][$i];
+	                $_FILES['userfile']['size'] 		= $_FILES['fileStaPhoto']['size'][$i];
+	                
+	                
+	                $uploadPath = './upload/stock/staff';
+	                $config['upload_path'] = $uploadPath;
+	                $config['allowed_types'] = 'gif|jpg|png';
+	                $config['max_size'] = 1024 * 50;
+	                $new_name=date('Y-m-d H:i:s');
+	                $new_name=str_replace(" ", "-", $new_name);
+	                $new_name=str_replace(":", "-", $new_name);
+	                $config['file_name'] = $new_name."_".$_SESSION['comId']."_".$_SESSION['usrId'];
+	                
+	                $this->load->library('upload', $config);
+	                $this->upload->initialize($config);
+	                
+	                
+	                if($this->upload->do_upload("fileStaPhoto")){
+	                    $fileData = $this->upload->data();
+	                    $fileNmImg.= $fileData['file_name'];
+	                    $staPhoto = $fileNmImg;
+	                }
+	                
+	            }
+	        }
+	    } */
+	    /* 
 		$data = array(
             'bra_id' 		=> $this->input->post('txtBraId'),
             'pos_id' 		=> $this->input->post('txtPosId'),
-            'sta_nm'		=> $this->input->post('txtStaffNmKh'),
-            'sta_nm_kh'		=> $this->input->post('staNmKh'),
-            'sta_gender'	=> $this->input->post('staGender'),
-            'sta_dob'		=> $this->input->post('staDob'),
-			'sta_addr'		=> $this->input->post('staAddr'),
-			'sta_phone1'	=> $this->input->post('staPhone1'),
-			'sta_phone2'	=> $this->input->post('staPhone2'),
-			'sta_email'		=> $this->input->post('staEmail'),
-			'sta_start_dt'	=> $this->input->post('staStartDt'),
-			'sta_end_dt'	=> $this->input->post('staEndDt'),
-			'sta_des'		=> $this->input->post('staDes'),
+            'sta_nm'		=> $this->input->post('txtStaffNm'),
+            'sta_nm_kh'		=> $this->input->post('txtStaffNmKh'),
+		    'sta_photo'	    => $staPhoto,
+            'sta_gender'	=> $this->input->post('cboGender'),
+		    //'sta_dob'		=> $this->input->post('txtDob'),
+		    'sta_dob'		=> date('Y-m-d',strtotime("01-01-1992")),
+			'sta_addr'		=> $this->input->post('txtAddr'),
+			'sta_phone1'	=> $this->input->post('txtPhone1'),
+			'sta_phone2'	=> $this->input->post('txtPhone2'),
+			'sta_email'		=> $this->input->post('txtEmail'),
+		    //'sta_start_dt'	=> $this->input->post('txtStartDate'),
+		    'sta_start_dt'	=> date('Y-m-d',strtotime("01-01-2018")),
+		    //'sta_end_dt'	=> $this->input->post('txtEndDate'),
+			'sta_des'		=> $this->input->post('txtDes'),
 			'useYn'			=> "Y",
             'com_id'		=> $_SESSION['comId']
         );
-        echo($this->input->post('txtBraId')."AAA");
-        /*
+ 
         if($this->input->post('braId') != null && $this->input->post('braId') != ""){
             //update data
             $data['sta_id'] = $this->input->post('staId');
             $data['upUsr'] = $_SESSION['usrId'];
             $data['upDt'] = date('Y-m-d H:i:s');
-            $this->M_branch->update($data);
+            $this->M_staff->update($data);
 
         }else{
             //insert data
             $data['regUsr'] = $_SESSION['usrId'];
             $data['regDt'] = date('Y-m-d H:i:s');
-            $this->M_branch->insert($data);
+            $this->M_staff->insert($data);
         
         }
-	    */
+	    
 	    echo 'OK';
+	    */
 	}
 	
-	public function getBranch(){
+	public function getStaff(){
 	    if(!$this->M_check_user->check()){
 	        redirect('/Login');
 	    }
@@ -80,14 +125,9 @@ class Staff extends CI_Controller {
 	    $dataSrch = array(
             'limit' 		=> $this->input->post('perPage'),
             'offset' 		=> $this->input->post('offset'),
-            'bra_id' 		=> $this->input->post('bra_id'),
-            'bra_nm' 		=> $this->input->post('braNm'),
-            'bra_nm_kh' 		=> $this->input->post('braNmKh'),
-            'bra_phone1' 	=> $this->input->post('braPhone'),
-            'bra_type_id' 		=> $this->input->post('braType'),
         );
-	    $data["OUT_REC"] = $this->M_branch->selectBrand($dataSrch);
-	    $data["OUT_REC_CNT"] = $this->M_branch->countBrand($dataSrch);
+	    $data["OUT_REC"] = $this->M_staff->selectStaff($dataSrch);
+	    $data["OUT_REC_CNT"] = $this->M_staff->countStaff($dataSrch);
 	    echo json_encode($data);
 	}
 	

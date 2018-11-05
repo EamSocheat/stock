@@ -52,11 +52,11 @@ var _thisPage = {
 			});
 			//
 			$("#btnSelectPhoto").click(function(e){
-				$("#userfile").trigger( "click" );
+				$("#fileStaPhoto").trigger( "click" );
 				
 			});
 			//
-			$("#userfile").change(function(){
+			$("#fileStaPhoto").change(function(){
 			    readURL(this);
 			});
 			//
