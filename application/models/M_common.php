@@ -19,7 +19,7 @@
 		
 	    
 		
-		public function uploadImage($fileTarget, $nameTarget, $path){
+		public function uploadImage($fileTarget, $nameTarget, $path,$pathSave){
 		    $fileNmImg="";
 		    if(!empty($fileTarget['name'])){
 		        $filesCount = count($fileTarget['name']);
@@ -47,6 +47,7 @@
 		            
 		            if($this->upload->do_upload($nameTarget)){
 		                $fileData = $this->upload->data();
+		                $fileNmImg.=$pathSave;
 		                $fileNmImg.= $fileData['file_name'];
 		            }
 		            

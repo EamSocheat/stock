@@ -21,6 +21,7 @@ var _thisPage = {
 		
 	},event : function(){
 		$("#perPage").change(function(e){
+			_pageNo=1;
 			getData();
 		});
 
@@ -131,9 +132,9 @@ function getData(page_no){
 			$("#tblStaff tbody").html("");
 			if(res.OUT_REC != null && res.OUT_REC.length >0){
 			    for(var i=0; i<res.OUT_REC.length;i++){
-			        var html = "<tr data-id='"+res.OUT_REC[i]["bra_id"]+"'>";
+			        var html = "<tr data-id='"+res.OUT_REC[i]["sta_id"]+"'>";
 			        html += "<td class='chk_box'><input type='checkbox'></td>";
-			        html += "<td class='sta_image'><img style='width: 20px;' src='http://localhost/git/stock/assets/image/default-staff-photo.png' class='img-circle' /></td>";
+			        html += "<td class='sta_image'><img style='width: 20px;height: 20px;' src='"+$("#base_url").val()+"/upload"+ res.OUT_REC[i]["sta_photo"] +"' class='img-circle' /></td>";
 			        html += "<td class='sta_nm'>"+res.OUT_REC[i]["sta_nm"]+"</td>";
 			        html += "<td class='sta_nm_kh'>"+res.OUT_REC[i]["sta_nm_kh"]+"</td>";
 			        html += "<td class='sta_gender'>"+res.OUT_REC[i]["sta_gender"]+"</td>";
@@ -160,7 +161,7 @@ function getData(page_no){
         }
 	});
 }
-function deleteData(bra_id){
+function deleteData(sta_id){
     stock.comm.confirmMsg($.i18n.prop("msg_sure_del"));
 	$("#btnConfirmOk").unbind().click(function(e){
 		$("#mdlConfirm").modal('hide');
@@ -169,7 +170,7 @@ function deleteData(bra_id){
 		var delObj={};
 		var delData={};
 		
-		delData["braId"] = bra_id;
+		delData["braId"] = sta_id;
 		delArr.push(delData);
 		delObj["delObj"]= delArr;
 		//
@@ -177,8 +178,8 @@ function deleteData(bra_id){
 	});
 }
 
-function editData(bra_id){
-	var data="id="+bra_id;
+function editData(sta_id){
+	var data="id="+sta_id;
 	data+="&action=U";
 	
 	var controllerNm = "PopupFormStaff";

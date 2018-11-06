@@ -15,11 +15,11 @@ var _thisPage = {
 			parent.$("#loading").hide();
 			clearForm();
 			if($("#frmAct").val() == "U"){
-			    getDataEdit($("#braId").val());
-			    $("#popupTitle").html("<i class='fa fa-home'></i> "+$.i18n.prop("btn_edit")+" "+ $.i18n.prop("lb_branch"));
+			    getDataEdit($("#staId").val());
+			    $("#popupTitle").html("<i class='fa fa-home'></i> "+$.i18n.prop("btn_edit")+" "+ $.i18n.prop("lb_staff"));
 			}else{
 			    $("#btnSaveNew").show();
-			    $("#popupTitle").html("<i class='fa fa-home'></i> "+$.i18n.prop("btn_add_new")+" "+ $.i18n.prop("lb_branch"));
+			    $("#popupTitle").html("<i class='fa fa-home'></i> "+$.i18n.prop("btn_add_new")+" "+ $.i18n.prop("lb_staff"));
 			}
 			$("#frmStaff").show();
 			$("#braNm").focus();
@@ -96,6 +96,7 @@ function saveData(str){
         contentType: false,
         processData: false,
 		success: function(res) {
+			console.log(res);
 		    parent.$("#loading").hide();
 			if(res =="OK"){
 				parent.stock.comm.alertMsg($.i18n.prop("msg_save_com"),"braNm");
@@ -114,27 +115,38 @@ function saveData(str){
 	});
 }
 
-function getDataEdit(bra_id){
+function getDataEdit(sta_id){
     //
     $("#loading").show();
     $.ajax({
 		type: "POST",
-		url: $("#base_url").val() +"Branch/getBranch",
-		data: {"bra_id":bra_id},
+		url: $("#base_url").val() +"Staff/getStaff",
+		data: {"staId":sta_id},
 		dataType: "json",
 		async: false,
 		success: function(res) {
 			
 			if(res.OUT_REC != null && res.OUT_REC.length >0){
-			    $("#braNm").val(res.OUT_REC[0]["bra_nm"]);
-			    $("#braNmKh").val(res.OUT_REC[0]["bra_nm_kh"]);
-			    $("#braPhone").val(res.OUT_REC[0]["bra_phone1"]);
-			    $("#braPhone2").val(res.OUT_REC[0]["bra_phone2"]);
-			    $("#braEmail").val(res.OUT_REC[0]["bra_email"]);
-			    $("#braType").val(res.OUT_REC[0]["bra_type_id"]);
-			    $("#braAddr").val(res.OUT_REC[0]["bra_addr"]);
-			    $("#braDes").val(res.OUT_REC[0]["bra_des"]);
-			    $("#braNm").focus();
+			    $("#txtBraNm").val(res.OUT_REC[0]["bra_nm"]);
+			    $("#txtBraId").val(res.OUT_REC[0]["bra_id"]);
+			    $("#txtStaffNm").val(res.OUT_REC[0]["sta_nm"]);
+			    $("#txtPosNm").val(res.OUT_REC[0]["pos_nm"]);
+			    $("#txtPosId").val(res.OUT_REC[0]["pos_id"]);
+			    $("#txtStaffNmKh").val(res.OUT_REC[0]["sta_nm_kh"]);
+			    $("#cboGender").val(res.OUT_REC[0]["sta_gender"]);
+			    $("#txtDob").val(res.OUT_REC[0]["sta_dob"]);
+			    $("#txtAddr").val(res.OUT_REC[0]["sta_addr"]);
+			    $("#txtPhone1").val(res.OUT_REC[0]["sta_phone1"]);
+			    $("#txtPhone2").val(res.OUT_REC[0]["sta_phone2"]);
+			    $("#txtEmail").val(res.OUT_REC[0]["sta_email"]);
+			    $("#txtStartDate").val(res.OUT_REC[0]["sta_start_dt"]);
+			    $("#txtEndDate").val(res.OUT_REC[0]["sta_end_dt"]);
+			    $("#txtDes").val(res.OUT_REC[0]["sta_des"]);
+			    if(res.OUT_REC[0]["sta_photo"] != null && res.OUT_REC[0]["sta_photo"] != ""){
+			    	$("#staImgView").attr("src",$("#base_url").val()+"upload"+res.OUT_REC[0]["sta_photo"]);
+			    }
+			    
+			    $("#txtStaffNm").focus();
 			}else{
 			    console.log(res);
 			    stock.comm.alertMsg($.i18n.prop("msg_err"));
@@ -152,8 +164,8 @@ function getDataEdit(bra_id){
 function clearForm(){
     $("#frmStaff input").val("");
     $("#frmStaff textarea").val("");
-    
-    $("#staNm").focus();
+    $("#staImgView").attr("src",$("#base_url").val()+"assets/image/default-staff-photo.png");
+    $("#txtStaffNm").focus();
 }
 
 function selectBranchCallback(data){

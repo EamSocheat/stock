@@ -39,44 +39,9 @@ class Staff extends CI_Controller {
 
 	    $staPhoto="";
 	    if(!empty($_FILES['fileStaPhoto']['name'])){
-	        $staPhoto = $this->M_common->uploadImage($_FILES['fileStaPhoto'],'fileStaPhoto','./upload/stock/staff');
+	        $staPhoto = $this->M_common->uploadImage($_FILES['fileStaPhoto'],'fileStaPhoto','./upload/stock/staff','/stock/staff/');
 	    }
-	   /*  if(!empty($_FILES['fileStaPhoto']['name'])){
-	        if(!empty($_FILES['fileStaPhoto']['name'])){
-	            $filesCount = count($_FILES['fileStaPhoto']['name']);
-	            
-	            for($i = 0; $i < $filesCount; $i++){
-	               
-	                $_FILES['userfile']['name'] 		= $_FILES['fileStaPhoto']['name'][$i];
-	                $_FILES['userfile']['type'] 		= $_FILES['fileStaPhoto']['type'][$i];
-	                $_FILES['userfile']['tmp_name'] 	= $_FILES['fileStaPhoto']['tmp_name'][$i];
-	                $_FILES['userfile']['error'] 		= $_FILES['fileStaPhoto']['error'][$i];
-	                $_FILES['userfile']['size'] 		= $_FILES['fileStaPhoto']['size'][$i];
-	                
-	                
-	                $uploadPath = './upload/stock/staff';
-	                $config['upload_path'] = $uploadPath;
-	                $config['allowed_types'] = 'gif|jpg|png';
-	                $config['max_size'] = 1024 * 50;
-	                $new_name=date('Y-m-d H:i:s');
-	                $new_name=str_replace(" ", "-", $new_name);
-	                $new_name=str_replace(":", "-", $new_name);
-	                $config['file_name'] = $new_name."_".$_SESSION['comId']."_".$_SESSION['usrId'];
-	                
-	                $this->load->library('upload', $config);
-	                $this->upload->initialize($config);
-	                
-	                
-	                if($this->upload->do_upload("fileStaPhoto")){
-	                    $fileData = $this->upload->data();
-	                    $fileNmImg.= $fileData['file_name'];
-	                    $staPhoto = $fileNmImg;
-	                }
-	                
-	            }
-	        }
-	    } */
-	    /* 
+
 		$data = array(
             'bra_id' 		=> $this->input->post('txtBraId'),
             'pos_id' 		=> $this->input->post('txtPosId'),
@@ -98,7 +63,7 @@ class Staff extends CI_Controller {
             'com_id'		=> $_SESSION['comId']
         );
  
-        if($this->input->post('braId') != null && $this->input->post('braId') != ""){
+        if($this->input->post('staId') != null && $this->input->post('staId') != ""){
             //update data
             $data['sta_id'] = $this->input->post('staId');
             $data['upUsr'] = $_SESSION['usrId'];
@@ -114,7 +79,7 @@ class Staff extends CI_Controller {
         }
 	    
 	    echo 'OK';
-	    */
+	    
 	}
 	
 	public function getStaff(){
@@ -125,6 +90,7 @@ class Staff extends CI_Controller {
 	    $dataSrch = array(
             'limit' 		=> $this->input->post('perPage'),
             'offset' 		=> $this->input->post('offset'),
+            'sta_id' 		=> $this->input->post('staId')
         );
 	    $data["OUT_REC"] = $this->M_staff->selectStaff($dataSrch);
 	    $data["OUT_REC_CNT"] = $this->M_staff->countStaff($dataSrch);
@@ -148,7 +114,7 @@ class Staff extends CI_Controller {
             );
             
             $dataVal = array(
-            'id_val' 		=> $delObj[$i]['braId'],
+            'id_val' 		=> $delObj[$i]['staId'],
             'com_val' 		=> $_SESSION['comId']
             );
 	        $chkData = $this->M_common->checkActiveRecord($dataCol,$dataVal);
@@ -162,7 +128,7 @@ class Staff extends CI_Controller {
             );
             
             $dataVal = array(
-            'id_val' 		=> $delObj[$i]['braId'],
+            'id_val' 		=> $delObj[$i]['staId'],
             'com_val' 		=> $_SESSION['comId']
             );
 	        $chkData = $this->M_common->checkActiveRecord($dataCol,$dataVal);
@@ -172,7 +138,7 @@ class Staff extends CI_Controller {
 	            continue;
 	        }else{
 	            $data = array(
-	                'bra_id'    => $delObj[$i]['braId'],
+	                'bra_id'    => $delObj[$i]['staId'],
         			'useYn'		=> "N",
                     'com_id'	=> $_SESSION['comId'],
                     'upDt'		=> date('Y-m-d H:i:s'),
