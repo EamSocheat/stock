@@ -42,8 +42,8 @@
 		}
 
 		public function update($data){
-			$this->db->where('com_id', $data["com_id"]);
-			$this->db->where('sta_id', $data["sta_id"]);
+			$this->db->where('com_id', $_SESSION['comId']);
+			$this->db->where('sta_id', $data['sta_id']);
 			$this->db->update('tbl_staff', $data);
 		}
 		

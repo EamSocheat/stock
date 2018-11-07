@@ -79,7 +79,7 @@ var _thisPage = {
 					var delData={};
 					var tblTr = $(this).parent().parent();
 					var braId=tblTr.attr("data-id");
-					delData["braId"] = braId;
+					delData["staId"] = braId;
 					delArr.push(delData);
 				});
 				
@@ -103,6 +103,7 @@ var _thisPage = {
 };
 
 function getData(page_no){
+	$("#chkAllBox").prop( "checked", false );
     var pageNo =1;
     if(page_no != "" && page_no != null && page_no != undefined){
         if(page_no <=0){
@@ -115,11 +116,11 @@ function getData(page_no){
     dat["perPage"] = $("#perPage").val();
     dat["offset"] = parseInt($("#perPage").val())  * ( pageNo - 1);
     //searching
-    dat["braNm"] =      $("#txtSrchBraNm").val().trim();
-    dat["braNmKh"] =    $("#txtSrchBraNmKh").val().trim();
-    dat["braPhone"] =   $("#txtSrchBraPhone").val().trim();
-    dat["braType"] =    $("#cbxSrchBraType option:selected").val();
-
+    dat["staNm"] =      $("#txtSrchStaNm").val().trim();
+    dat["staNmKh"] =    $("#txtSrchStaNmKh").val().trim();
+    dat["staPhone"] =   $("#txtSrchStaPhone").val().trim();
+    dat["braId"] =    	$("#cbxSrchBranch option:selected").val();
+    dat["posId"] =    	$("#cbxSrchPos option:selected").val();
     //
     $("#loading").show();
     $.ajax({
@@ -133,13 +134,18 @@ function getData(page_no){
 			if(res.OUT_REC != null && res.OUT_REC.length >0){
 			    for(var i=0; i<res.OUT_REC.length;i++){
 			        var html = "<tr data-id='"+res.OUT_REC[i]["sta_id"]+"'>";
+			        var urlPhoto ="";
+			        if(res.OUT_REC[i]["sta_photo"] != null && res.OUT_REC[i]["sta_photo"] != ""){
+			        	urlPhoto = $("#base_url").val()+"/upload"+ res.OUT_REC[i]["sta_photo"];
+			        }
 			        html += "<td class='chk_box'><input type='checkbox'></td>";
-			        html += "<td class='sta_image'><img style='width: 20px;height: 20px;' src='"+$("#base_url").val()+"/upload"+ res.OUT_REC[i]["sta_photo"] +"' class='img-circle' /></td>";
+			        html += "<td class='sta_image'><img style='width: 20px;height: 20px;' src='"+ urlPhoto +"' class='img-circle' /></td>";
 			        html += "<td class='sta_nm'>"+res.OUT_REC[i]["sta_nm"]+"</td>";
 			        html += "<td class='sta_nm_kh'>"+res.OUT_REC[i]["sta_nm_kh"]+"</td>";
 			        html += "<td class='sta_gender'>"+res.OUT_REC[i]["sta_gender"]+"</td>";
 			        html += "<td class='sta_phone1'>"+res.OUT_REC[i]["sta_phone1"]+"</td>";
-			        html += "<td class='bra_nm'>"+(getCookie("lang") == "kh" ? res.OUT_REC[i]["bra_nm_kh"] : res.OUT_REC[i]["bra_nm"])+"</td>";
+			        html += "<td class='pos_nm'>"+res.OUT_REC[i]["pos_nm"]+"</td>";
+			        html += "<td class='bra_nm'>"+res.OUT_REC[i]["bra_nm"]+"</td>";
 			        html += "<td class='act_btn text-center'><button onclick='editData("+res.OUT_REC[i]["sta_id"]+")' type='button' class='btn btn-primary btn-xs'><i class='fa fa-pencil-square-o' aria-hidden='true'></i></button></td>";
 			
 			        html += "</tr>";
@@ -149,7 +155,7 @@ function getData(page_no){
 			    //--pagination
 			    stock.comm.renderPaging("paging",$("#perPage").val(),res.OUT_REC_CNT[0]["total_rec"],pageNo);
 			}else{
-			    $("#tblStaff tbody").append("<tr><td colspan='8' style='    text-align: center;'>"+$.i18n.prop("lb_no_data")+"</td></tr>");
+			    $("#tblStaff tbody").append("<tr><td colspan='9' style='    text-align: center;'>"+$.i18n.prop("lb_no_data")+"</td></tr>");
 			    //--pagination
 			    stock.comm.renderPaging("paging",$("#perPage").val(),0,pageNo);
 			}
@@ -170,7 +176,7 @@ function deleteData(sta_id){
 		var delObj={};
 		var delData={};
 		
-		delData["braId"] = sta_id;
+		delData["staId"] = sta_id;
 		delArr.push(delData);
 		delObj["delObj"]= delArr;
 		//
@@ -195,11 +201,9 @@ function deleteDataArr(dataArr){
 
 	$.ajax({
 		type: "POST",
-		url: $("#base_url").val() +"Branch/delete",
+		url: $("#base_url").val() +"Staff/delete",
 		data: dataArr,
 		success: function(res) {
-			console.log("tset")
-			console.log(res)
 		    if(res > 0){
 		        stock.comm.alertMsg(res+$.i18n.prop("msg_del_com"));
 		        getData(_pageNo);

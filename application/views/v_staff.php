@@ -39,14 +39,14 @@
 								        <div class="col-sm-3 col-md-3 col-lg-3">
         									<div class="form-group">
                                                 <label for="txtSrchBraNm" class="control-label" data-i18ncd="lb_name">Name</label>
-                                                <input type="text" class="form-control input-sm" id="txtSrchBraNm" placeholder="Name">
+                                                <input type="text" class="form-control input-sm" id="txtSrchStaNm" placeholder="Name">
                                               
                                             </div>
         								</div>
         								<div class="col-sm-3 col-md-3 col-lg-3">
         									<div class="form-group">
                                                 <label for="txtSrchBraNmKh" class="control-label" data-i18ncd="lb_name_kh">Khmer Name </label>
-                                                <input type="text" class="form-control input-sm" id="txtSrchBraNmKh" placeholder="Khmer Name ">
+                                                <input type="text" class="form-control input-sm" id="txtSrchStaNmKh" placeholder="Khmer Name ">
                                         
                                             </div>
         								</div>
@@ -54,11 +54,32 @@
         								<div class="col-sm-3 col-md-3 col-lg-3">
         									<div class="form-group">
                                                 <label for="txtSrchBraPhone" class="control-label" data-i18ncd="lb_phone">Phone </label>
-                                                <input type="text" class="form-control input-sm"  id="txtSrchBraPhone" placeholder="Phone">
+                                                <input type="text" class="form-control input-sm"  id="txtSrchStaPhone" placeholder="Phone">
+                                        
+                                            </div>
+        								</div>
+        								
+        								<div class="col-sm-3 col-md-3 col-lg-3">
+        									<div class="form-group">
+                                                <label for="cbxSrchBraType" class="control-label" data-i18ncd="lb_branch">Branch</label>
+                                                <select class="form-control input-sm" id="cbxSrchBranch" name="cbxSrchBranch">
+                                                   
+                                                </select>
                                         
                                             </div>
         								</div>        								
         								
+								    </div>
+								    <div class="col-sm-12 col-md-12 col-lg-12 row">
+								    	<div class="col-sm-3 col-md-3 col-lg-3">
+        									<div class="form-group">
+                                                <label for="cbxSrchBraType" class="control-label" data-i18ncd="lb_position">Position</label>
+                                                <select class="form-control input-sm" id="cbxSrchPos" name="cbxSrchPos">
+                                                   
+                                                </select>
+                                        
+                                            </div>
+        								</div> 
 								    </div>
     								<div class="col-sm-12 col-md-12 col-lg-12">
     								    <button id="btnSearch" type="button" class="btn btn-success btn-sm pull-right"><i class="fa fa-search" aria-hidden="true"></i> <span data-i18ncd="lb_search">Search</span></button>
@@ -119,6 +140,7 @@
     					  <th data-i18ncd="lb_name_kh">Khmer Name</th>
     					  <th data-i18ncd="lb_gender">Gender</th>
     					  <th data-i18ncd="lb_phone">Phone</th>
+    					  <th data-i18ncd="lb_position">Position</th>
     					  <th data-i18ncd="lb_branch">Branch</th>
     					  <th data-i18ncd="lb_action">Action</th>
     					</tr>

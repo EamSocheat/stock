@@ -90,7 +90,13 @@ class Staff extends CI_Controller {
 	    $dataSrch = array(
             'limit' 		=> $this->input->post('perPage'),
             'offset' 		=> $this->input->post('offset'),
-            'sta_id' 		=> $this->input->post('staId')
+            'sta_id' 		=> $this->input->post('staId'),
+            'sta_nm' 		=> $this->input->post('staNm'),
+        	'sta_nm_kh' 	=> $this->input->post('staNmKh'),
+            'sta_phone' 	=> $this->input->post('staPhone'),
+            'bra_id' 		=> $this->input->post('braId'),
+            'pos_id' 		=> $this->input->post('posId')
+            
         );
 	    $data["OUT_REC"] = $this->M_staff->selectStaff($dataSrch);
 	    $data["OUT_REC_CNT"] = $this->M_staff->countStaff($dataSrch);
@@ -120,10 +126,10 @@ class Staff extends CI_Controller {
 	        $chkData = $this->M_common->checkActiveRecord($dataCol,$dataVal);
 	        $cntActive +=$chkData->active_rec;
 	        
-	        //check stock table using branch or not 
+	        //check stock table using import or not 
 	        $dataCol = array(
-            'tbl_nm' 		=> "tbl_stock",
-            'id_nm' 		=> "bra_id",
+            'tbl_nm' 		=> "tbl_import",
+            'id_nm' 		=> "regUsr",
             'com_id' 		=> "com_id"
             );
             
@@ -134,17 +140,37 @@ class Staff extends CI_Controller {
 	        $chkData = $this->M_common->checkActiveRecord($dataCol,$dataVal);
 	        $cntActive += $chkData->active_rec;
 	        
+	        //check use table using staff or not 
+	        $dataCol = array(
+            'tbl_nm' 		=> "tbl_use",
+            'id_nm' 		=> "regUsr",
+            'com_id' 		=> "com_id"
+            );
+            
+	        $chkData = $this->M_common->checkActiveRecord($dataCol,$dataVal);
+	        $cntActive += $chkData->active_rec;
+	        
+	        //check use table using staff or not
+	        $dataCol = array(
+            'tbl_nm' 		=> "tbl_use",
+            'id_nm' 		=> "sta_id",
+            'com_id' 		=> "com_id"
+            );
+            
+	        $chkData = $this->M_common->checkActiveRecord($dataCol,$dataVal);
+	        $cntActive += $chkData->active_rec;
+	        
 	        if($cntActive >0){
 	            continue;
 	        }else{
 	            $data = array(
-	                'bra_id'    => $delObj[$i]['staId'],
+	                'sta_id'    => $delObj[$i]['staId'],
         			'useYn'		=> "N",
                     'com_id'	=> $_SESSION['comId'],
                     'upDt'		=> date('Y-m-d H:i:s'),
                     'upUsr'		=> $_SESSION['usrId']
                 );
-	            $this->M_branch->update($data);
+	            $this->M_staff->update($data);
 	            $cntDel+=1;
 	        }
 	    }
