@@ -19,6 +19,11 @@ var _thisPage = {
 		
 		$("#cbxSrchBraType").prepend("<option value='' selected='selected'></option>");
 		
+		
+		stock.comm.getPositionSelect("cbxSrchPos");
+		$("#cbxSrchPos").prepend("<option value='' selected='selected'></option>");
+		stock.comm.getBrnachSelect("cbxSrchBranch");
+		$("#cbxSrchBranch").prepend("<option value='' selected='selected'></option>");
 	},event : function(){
 		$("#perPage").change(function(e){
 			_pageNo=1;
@@ -224,10 +229,11 @@ function deleteDataArr(dataArr){
  * 
  */
 function resetFormSearch(){
-	$("#txtSrchBraNm").val("");
-    $("#txtSrchBraNmKh").val("");
-    $("#txtSrchBraPhone").val("");
-    $("#cbxSrchBraType").val("");
+	$("#txtSrchStaNm").val("");
+    $("#txtSrchStaNmKh").val("");
+    $("#txtSrchStaPhone").val("");
+    $("#cbxSrchBranch").val("");
+    $("#cbxSrchPos").val("");
 }
 
 /**

@@ -269,14 +269,14 @@ $(document).ready(function() {
 		window.location.reload();
 	});
 
-	$(".box-search .box-header h3").click(function(e){
+	$(".box-search .box-header h3, .box-search .box-header i").click(function(e){
 		$(".box-search .box-body").slideToggle(500,function(){
 			$(".form-control").eq(0).focus();
 			if($(".box-search .box-body").css("display") == "block"){
 				$(".box-search .box-header i").removeClass("fa-search-plus");
-				$(".box-search .box-header i").addClass("fa-search");
+				$(".box-search .box-header i").addClass("fa-search-minus");
 			}else{
-				$(".box-search .box-header i").removeClass("fa-search");
+				$(".box-search .box-header i").removeClass("fa-search-minus");
 				$(".box-search .box-header i").addClass("fa-search-plus");
 			}
 		});
@@ -450,7 +450,7 @@ function getUserMenu(){
 					styleFont="font-weight: 600;";
 				}
 				var htmlMenu = '<li class="'+activeClass+'">';
-				htmlMenu += '<a style="'+styleFont+'" href="'+datarow["menu_nm"]+'">';
+				htmlMenu += '<a style="'+styleFont+'" href="'+datarow["menu_nm"].replace(/ /g,"")+'">';
 				htmlMenu += '<i class="'+datarow["menu_icon_nm"]+'"></i> <span>'+menuNm+'</span>';
 				htmlMenu += '</a>';
 				htmlMenu += '</li>';

@@ -108,7 +108,7 @@
         display: none;
     }
     
-    .box-search .box-header h3{
+    .box-search .box-header h3, .box-search .box-header i{
         cursor: pointer;
     }
     

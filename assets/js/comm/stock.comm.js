@@ -520,8 +520,9 @@ if(!stock.comm) {stock.comm={};}
         
     };  
 	
-	
-
+	/**
+	 * 
+	 */
     stock.comm.getBrnachType = function(target_id){
     	$.ajax({
     		type: "POST",
@@ -546,4 +547,64 @@ if(!stock.comm) {stock.comm={};}
     			stock.comm.alertMsg("System Error!!! PLease connect again.");
             }
     	});
-    }
+    };
+    
+
+	/**
+	 * 
+	 */
+    stock.comm.getBrnachSelect = function(target_id){
+    	$.ajax({
+    		type: "POST",
+    		url: $("#base_url").val() +"Branch/getBranch",
+    		dataType: 'json',
+    		async: false,
+    		success: function(res) {
+    			if(res.OUT_REC.length > 0){
+    				$("#"+target_id+" option").remove();
+    				for(var i=0; i<res.OUT_REC.length; i++){
+    					var braNm = (getCookie("lang") == "kh" ? res.OUT_REC[i]["bra_nm_kh"] : res.OUT_REC[i]["bra_nm"]);
+    					$("#"+target_id).append("<option value='"+res.OUT_REC[i]["bra_id"]+"'>"+braNm+"</option>");
+    				}
+    				
+    			}else{
+    				console.log(res);
+    				stock.comm.alertMsg("System Error!!! PLease connect again.");
+    			}
+    		},
+    		error : function(data) {
+    			console.log(data);
+    			stock.comm.alertMsg("System Error!!! PLease connect again.");
+            }
+    	});
+    };
+    
+    /**
+     *
+     */
+    stock.comm.getPositionSelect = function(target_id){
+    	$.ajax({
+    		type: "POST",
+    		url: $("#base_url").val() +"Position/getPositionData",
+    		dataType: 'json',
+    		async: false,
+    		success: function(res) {
+    			if(res.OUT_REC.length > 0){
+    				$("#"+target_id+" option").remove();
+    				for(var i=0; i<res.OUT_REC.length; i++){
+    					var braNm = (getCookie("lang") == "kh" ? res.OUT_REC[i]["pos_nm_kh"] : res.OUT_REC[i]["pos_nm"]);
+    					$("#"+target_id).append("<option value='"+res.OUT_REC[i]["pos_id"]+"'>"+braNm+"</option>");
+    				}
+    				
+    			}else{
+    				console.log(res);
+    				stock.comm.alertMsg("System Error!!! PLease connect again.");
+    			}
+    		},
+    		error : function(data) {
+    			console.log(data);
+    			stock.comm.alertMsg("System Error!!! PLease connect again.");
+            }
+    	});
+    };
+    
