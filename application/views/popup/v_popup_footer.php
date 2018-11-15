@@ -16,6 +16,7 @@
 <script src="<?php echo base_url('assets/') ?>bower_components/moment/min/moment.min.js"></script>
 <!-- datepicker -->
 <script src="<?php echo base_url('assets/') ?>bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<script src="<?php echo base_url('assets/') ?>bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.kh.js"></script>
 
 <!-- FastClick -->
 <script src="<?php echo base_url('assets/') ?>bower_components/fastclick/lib/fastclick.js"></script>
@@ -29,6 +30,12 @@
 <!--Multi language  -->
 <script src="<?php echo base_url('assets/') ?>lib/jquery.i18n.properties-min.js"></script>
 <script src="<?php echo base_url('assets/') ?>js/comm/stock.comm.js"></script>
+
+<!--inputmask  -->
+<script src="<?php echo base_url('assets/') ?>plugins/input-mask/jquery.inputmask.js"></script>
+<script src="<?php echo base_url('assets/') ?>plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+<script src="<?php echo base_url('assets/') ?>plugins/input-mask/jquery.inputmask.extensions.js"></script>
+
 <script type="text/javascript">
 var getUrlParameter = function getUrlParameter(sParam) {
     var sPageURL = decodeURIComponent(window.location.search.substring(1)),

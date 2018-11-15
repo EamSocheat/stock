@@ -19,5 +19,8 @@ class Menu extends CI_Controller {
 		echo json_encode($data);
 	}
 	
-	
+	public function getMenuCompany(){
+	    $data['OUT_REC'] = $this->M_menu->selectMenuCompany();
+		echo json_encode($data);
+	}
 }

@@ -30,7 +30,8 @@
                 				<label for="braNm2" data-i18ncd="lb_branch">Branch Name</label>
                 				<div class="input-group">
                                 	<input type="text" class="form-control input-sm" disabled="disabled" id="txtBraNm" name="txtBraNm">
-                                    <span id="btnPopupBranch" class="input-group-addon label-warning" style="cursor: pointer;border-color: #f39c12 !important;"><i class="fa fa-search-plus"></i></span>
+                                    <span id="btnPopupBranch" class="input-group-addon label-info" style="border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;cursor: pointer;border-color: #46b8da !important;"><i class="fa fa-search-plus"></i></span>
                                 </div>
                                 <input type="hidden" id="txtBraId" name="txtBraId">
                 			</div>
@@ -46,7 +47,8 @@
                 				<label for="txtPosNm" data-i18ncd="lb_position">Position</label>
                 				<div class="input-group">
                                 	<input type="text" class="form-control input-sm" disabled="disabled" id="txtPosNm" name="txtPosNm">
-                                    <span id="btnPopupPosition" class="input-group-addon label-warning" style="cursor: pointer;border-color: #f39c12 !important;"><i class="fa fa-search-plus"></i></span>
+                                    <span id="btnPopupPosition" class="input-group-addon label-info" style="border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;cursor: pointer;border-color: #46b8da !important;"><i class="fa fa-search-plus"></i></span>
                                 </div>
                                 <input type="hidden" id="txtPosId" name="txtPosId">
                 			</div>
@@ -73,16 +75,21 @@
                 		<div class="col-xs-4 padding-forms-right">
                 			<div class="form-group">
                                	<label for="txtDob" data-i18ncd="staDob">DOB</label>
-                            	<input type="text" class="form-control" id="txtDob" name="txtDob" required="required">
-                            </div>
-                		</div>
-                		<div class="col-xs-4 padding-forms-right">
-                			<div class="form-group">
-                               	<label for="txtAddr" data-i18ncd="txtAddr">Address</label>
-                            	<input type="text" class="form-control" id="txtAddr" name="txtAddr">
+			                	<div class="input-group date">
+				                  	<div class="input-group-addon" style="border-top-left-radius: 5px; border-bottom-left-radius: 5px;">
+				                    	<i class="fa fa-calendar"></i>
+				                  	</div>
+				                  	<input type="text" class="form-control pull-right date-pick" id="txtDob" name="txtDob" required="required" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="">
+				                </div>
                             </div>
                 		</div>
                 		
+                		<div class="col-xs-4 padding-forms-right">
+                			<div class="form-group">
+                				<label for="txtDes" data-i18ncd="staDes">Description</label>
+                              	<input type="text" class="form-control" id="txtDes" name="txtDes" />
+                			</div>
+                		</div>
                 	</div>
                 	
                 	<div class="col-xs-12 row" style="padding:0px">
@@ -107,24 +114,39 @@
                 	</div>
                 	
                 	<div class="col-xs-12 row" style="padding:0px">
+                		<div class="col-xs-12 padding-forms-left padding-forms-right">
+                			<div class="form-group">
+                               	<label for="txtAddr" data-i18ncd="txtAddr">Address</label>
+                            	<input type="text" class="form-control" id="txtAddr" name="txtAddr">
+                            </div>
+                		</div>
+                	</div>
+                	
+                	
+                	<div class="col-xs-12 row" style="padding:0px">
                 		<div class="col-xs-4 padding-forms-left">
                 			<div class="form-group">
                 				<label for="txtStartDate" data-i18ncd="staStartDate">Start Date</label>
-                              	<input type="text" class="form-control" id="txtStartDate" name="txtStartDate" />
+                              	<div class="input-group date">
+				                  	<div class="input-group-addon" style="border-top-left-radius: 5px; border-bottom-left-radius: 5px;">
+				                    	<i class="fa fa-calendar"></i>
+				                  	</div>
+				                  	<input type="text" class="form-control pull-right date-pick" id="txtStartDate" name="txtStartDate" required="required" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="">
+				                </div>
                 			</div>
                 		</div>
                 		<div class="col-xs-4 padding-forms-right">
                 			<div class="form-group">
                 				<label for="txtStopDate" data-i18ncd="staEndDate">Stop Date</label>
-                              	<input type="text" class="form-control" id="txtStopDate" name="txtStopDate" />
+                              	<div class="input-group date">
+				                  	<div class="input-group-addon" style="border-top-left-radius: 5px; border-bottom-left-radius: 5px;">
+				                    	<i class="fa fa-calendar"></i>
+				                  	</div>
+				                  	<input type="text" class="form-control pull-right date-pick" id="txtStopDate" name="txtStopDate" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask="">
+				                </div>
                 			</div>
                 		</div>
-                		<div class="col-xs-4 padding-forms-right">
-                			<div class="form-group">
-                				<label for="txtDes" data-i18ncd="staDes">Description</label>
-                              	<input type="text" class="form-control" id="txtDes" name="txtDes" />
-                			</div>
-                		</div>
+                		
                 	</div>
            
                 	

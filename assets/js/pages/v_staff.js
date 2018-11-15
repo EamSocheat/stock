@@ -47,7 +47,7 @@ var _thisPage = {
 			$("#loading").show();
 			var controllerNm = "PopupFormStaff";
 			var option={};
-			option["height"] = "570px";
+			option["height"] = "650px";
 			
 			stock.comm.openPopUpForm(controllerNm,option, null,"modal-md");
 		});
@@ -195,7 +195,7 @@ function editData(sta_id){
 	
 	var controllerNm = "PopupFormStaff";
 	var option={};
-	option["height"] = "570px";
+	option["height"] = "650px";
     stock.comm.openPopUpForm(controllerNm,option, data,"modal-md");
 }
 

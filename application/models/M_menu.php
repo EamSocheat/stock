@@ -41,4 +41,17 @@
 			
 			return $this->db->get()->result();
 		}
+		
+		function selectMenuCompany(){
+			
+			$this->db->select('tbl_menu.menu_id, menu_nm, menu_nm_kh, menu_icon_nm, menu_group, menu_order');
+			$this->db->from('tbl_menu_company');
+			$this->db->join('tbl_menu', 'tbl_menu.menu_id = tbl_menu_company.menu_id');
+			$this->db->where('com_id', $_SESSION['comId']);
+			$this->db->where('tbl_menu_company.useYn', "Y");
+			$this->db->order_by("menu_group", "asc");
+			$this->db->order_by("menu_order", "asc");
+			
+			return $this->db->get()->result();
+		}
     }

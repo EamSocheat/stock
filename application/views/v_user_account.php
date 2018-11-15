@@ -79,9 +79,9 @@
 				<div class="row">
 					<div class="col-xs-12">
                         <div class="col-xs-12">
-    					    <button type="button" id="btnDelete" class="btn btn-danger btn-sm" style="margin-right: 5px" onclick="fn_delete();"><i class="fa fa-trash" aria-hidden="true"></i> <span data-i18ncd="btn_delete">Delete</span></button>
+    					    <button type="button" id="btnDelete" class="btn btn-danger btn-sm" style="margin-right: 5px"><i class="fa fa-trash" aria-hidden="true"></i> <span data-i18ncd="btn_delete">Delete</span></button>
     					    <!-- <button type="button" id="btnEdit" class="btn btn-primary btn-sm" style="margin-right: 5px"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span data-i18ncd="btn_edit">Edit</span></button> -->
-    					    <button type="button" id="btnAddNew" class="btn btn-default btn-sm" onclick="_thisPage.addNewData();"><i class="fa fa-plus" aria-hidden="true"></i> <span data-i18ncd="btn_add_new">Add New</span></button>
+    					    <button type="button" id="btnAddNew" class="btn btn-default btn-sm" ><i class="fa fa-plus" aria-hidden="true"></i> <span data-i18ncd="btn_add_new">Add New</span></button>
                         </div>
     				</div>
 				</div>
@@ -109,7 +109,7 @@
 				  <table class="table table-hover" id="">
 				    <thead>  
     					<tr>
-    					  <th><input type="checkbox" id="chkAll" style="display:none;"></th>
+    					  <th><input type="checkbox" id="chkAll"></th>
     					  <th data-i18ncd="lb_name">Name</th>
     					  <th data-i18ncd="lb_name_kh">Khmer Name</th>
     					  <th data-i18ncd="lb_des">Description</th>

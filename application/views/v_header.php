@@ -116,6 +116,14 @@
   </style>
 </head>
 <body class="hold-transition skin-black-light sidebar-mini fixed">
+<!--  -->
+<div class="row" style="position: relative;">
+  	<div class="alert alert-danger" style="position: fixed;z-index: 999999999;text-align:center;padding-left: 30px;padding-right: 30px;display: none;border-radius: 5px;" id="msgErr"> 
+	  <strong style="margin: 0 auto;"> <i class="fa fa-warning"></i> Danger : </strong> 
+	  <span id="msgShw"></span>
+  	</div>
+</div>
+<!--  -->
 <input type="hidden" id="menu_active" value="<?php echo $menu_active; ?>"/>
 <input type="hidden" id="base_url" value="<?php echo base_url() ?>"/>
 <div class="wrapper">
